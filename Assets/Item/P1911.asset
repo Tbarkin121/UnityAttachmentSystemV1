@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec99c1751d35cbb488a38236a765445b, type: 3}
+  m_Name: P1911
+  m_EditorClassIdentifier: 
+  artwork: {fileID: -8011393075847099815, guid: 524a1ed065583964c9182e347fa94a07,
+    type: 3}

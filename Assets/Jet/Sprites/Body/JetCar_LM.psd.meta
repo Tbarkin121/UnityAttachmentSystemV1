@@ -1,0 +1,595 @@
+fileFormatVersion: 2
+guid: 524a1ed065583964c9182e347fa94a07
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -452080584323466769
+    second: JetCar_LM_0
+  - first:
+      213: 5793759840862329669
+    second: JetCar_LM_1
+  - first:
+      213: 9062672402930747171
+    second: JetCar_LM_2
+  - first:
+      213: 3740793055124171746
+    second: JetCar_LM_3
+  - first:
+      213: -9180586589042155323
+    second: JetCar_LM_4
+  - first:
+      213: -3281348274269387521
+    second: JetCar_LM_5
+  - first:
+      213: -5174345661739938750
+    second: JetCar_LM_6
+  - first:
+      213: 765818698505607522
+    second: JetCar_LM_7
+  - first:
+      213: 2426829194869907253
+    second: JetCar_LM_8
+  - first:
+      213: 1244792388429887849
+    second: JetCar_LM_9
+  - first:
+      213: -4494985858403269606
+    second: JetCar_LM_10
+  - first:
+      213: 4924954528596755111
+    second: JetCar_LM_11
+  - first:
+      213: -8011393075847099815
+    second: JetCar_LM_12
+  - first:
+      213: 4378113563403348017
+    second: JetCar_LM_13
+  - first:
+      213: -3182605286425191925
+    second: JetCar_LM_14
+  - first:
+      213: 3770392005260691356
+    second: JetCar_LM_15
+  - first:
+      213: 4370459641891531621
+    second: JetCar_LM_16
+  - first:
+      213: 8279877918588292074
+    second: JetCar_LM_17
+  - first:
+      213: 6609553211847591375
+    second: JetCar_LM_18
+  - first:
+      213: 399729388306428260
+    second: JetCar_LM_19
+  - first:
+      213: 596362544028872256
+    second: JetCar_LM_0
+  - first:
+      213: 5967502393679045350
+    second: JetCar_LM_1
+  - first:
+      213: -2644705502164519685
+    second: JetCar_LM_2
+  - first:
+      213: -7919305226837685661
+    second: JetCar_LM_3
+  - first:
+      213: -1702260800402968928
+    second: JetCar_LM_4
+  - first:
+      213: 8495515558293476340
+    second: JetCar_LM_5
+  - first:
+      213: -3733574168714038115
+    second: JetCar_LM_6
+  - first:
+      213: -4059110478507379800
+    second: JetCar_LM_7
+  - first:
+      213: 4280016037197077777
+    second: JetCar_LM_8
+  - first:
+      213: 230540216476083309
+    second: JetCar_LM_9
+  - first:
+      213: 5196033659679656620
+    second: JetCar_LM_10
+  - first:
+      213: 6739825503081890469
+    second: JetCar_LM_11
+  - first:
+      213: -8050404318723816017
+    second: JetCar_LM_12
+  - first:
+      213: 2032516097115368367
+    second: JetCar_LM_13
+  - first:
+      213: 7644240201702532549
+    second: JetCar_LM_14
+  - first:
+      213: 4931967681676126253
+    second: JetCar_LM_15
+  - first:
+      213: -6073136033267578039
+    second: JetCar_LM_16
+  - first:
+      213: -2607876800305310673
+    second: JetCar_LM_17
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: JetCar_LM_0
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 273
+        width: 10
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04e603af294b64800800000000000000
+      internalID: 596362544028872256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetCar_LM_1
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 271
+        width: 24
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e268835fc3d0d250800000000000000
+      internalID: 5967502393679045350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetCar_LM_2
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 242
+        width: 16
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf476f7ab5e1c4bd0800000000000000
+      internalID: -2644705502164519685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetCar_LM_3
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 238
+        width: 24
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36a027ebad9f81290800000000000000
+      internalID: -7919305226837685661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetCar_LM_4
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 216
+        width: 25
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0aea8ec22da5068e0800000000000000
+      internalID: -1702260800402968928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetCar_LM_5
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 214
+        width: 27
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f313eb936226e570800000000000000
+      internalID: 8495515558293476340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetCar_LM_6
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 211
+        width: 25
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d94b93b231eaf2cc0800000000000000
+      internalID: -3733574168714038115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetCar_LM_7
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 209
+        width: 25
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a37080a6842ba7c0800000000000000
+      internalID: -4059110478507379800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetCar_LM_8
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 210
+        width: 25
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11d5b1ac8eba56b30800000000000000
+      internalID: 4280016037197077777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetCar_LM_9
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 210
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d64af7dfa1b033300800000000000000
+      internalID: 230540216476083309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetCar_LM_10
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 178
+        width: 29
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caacd2e65150c1840800000000000000
+      internalID: 5196033659679656620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetCar_LM_11
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 146
+        width: 15
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a2805ff59ba88d50800000000000000
+      internalID: 6739825503081890469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetCar_LM_12
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 141
+        width: 19
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa5423ccce7374090800000000000000
+      internalID: -8050404318723816017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetCar_LM_13
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 145
+        width: 15
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fab23d02f92f43c10800000000000000
+      internalID: 2032516097115368367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetCar_LM_14
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 145
+        width: 15
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c56d3866fbc51a60800000000000000
+      internalID: 7644240201702532549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetCar_LM_15
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 145
+        width: 13
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d28230ec97ed17440800000000000000
+      internalID: 4931967681676126253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetCar_LM_16
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 114
+        width: 25
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94b067064f2e7bba0800000000000000
+      internalID: -6073136033267578039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetCar_LM_17
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 81
+        width: 17
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f24d1d30ed5fecbd0800000000000000
+      internalID: -2607876800305310673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

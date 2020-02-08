@@ -6,6 +6,7 @@ public class ThrusterForce : MonoBehaviour
 {
     public Thruster thruster;
     public Rigidbody2D rb;
+    private float targetForce = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,19 +17,21 @@ public class ThrusterForce : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            // Debug.Log("RB COM : " + rb.centerOfMass); //This is always 0,0,0
-            Debug.Log("thruster COM : " + transform.localPosition);
-            rb.AddForce(transform.up*thruster.force);
-            //Can make the torque calc more flexible but this is fine for now
-            rb.AddTorque((transform.localPosition.x+thruster.thrustOffset.x)*thruster.force);
-        }
+        float actualForce = Mathf.Clamp(targetForce, -thruster.force, thruster.force);
+        Debug.Log("thruster COM : " + transform.localPosition);
+        rb.AddForce(transform.up*actualForce);
+        //Can make the torque calc more flexible but this is fine for now
+        rb.AddTorque((transform.localPosition.x+thruster.thrustOffset.x)*actualForce);
+    }
+    public void UpdateTargetForce (float targetForce_)
+    {
+        Debug.Log("Updating Thruster Force");
+        targetForce = targetForce_;
     }
 
-    void OnThrusterChanged (Thruster newThruster)
+    void OnThrusterChanged (Thruster thruster_)
     {
-        thruster = newThruster;
-        Debug.Log("Change Thruster Force");
+        thruster = thruster_;
+        Debug.Log("Thurst Change");
     }
 }

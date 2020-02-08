@@ -15,6 +15,6 @@ MonoBehaviour:
   artwork: {fileID: -482130097425260544, guid: 59ba22856931c8349aa675ec02150ba1, type: 3}
   mass: 1
   hitpoints: 100
-  force: 1
+  force: 5
   attachment_point: {x: 0.05, y: -0.08, z: 0}
   thrustOffset: {x: 0, y: 0, z: 0}

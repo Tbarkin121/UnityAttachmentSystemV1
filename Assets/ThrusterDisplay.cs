@@ -20,16 +20,19 @@ public class ThrusterDisplay : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(transform.localPosition);
-        if (!flipped)
+        // Debug.Log(transform.localPosition);
+        if (thruster != null)
         {
-            transform.localPosition = thruster.attachment_point;
-        }
-        else
-        {
-            Vector3 attachment_pointF = thruster.attachment_point;
-            attachment_pointF.x *= -1;
-            transform.localPosition = attachment_pointF;
+            if (!flipped)
+            {
+                transform.localPosition = thruster.attachment_point;
+            }
+            else
+            {
+                Vector3 attachment_pointF = thruster.attachment_point;
+                attachment_pointF.x *= -1;
+                transform.localPosition = attachment_pointF;
+            }
         }
         
     }

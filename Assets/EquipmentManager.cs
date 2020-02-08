@@ -64,4 +64,9 @@ public class EquipmentManager : MonoBehaviour
         // if(Input.GetKeyDown(KeyCode.F))
 
     }
+
+    public void RemoveEquipment(GameObject engine_)
+    {
+        
+    }
 }

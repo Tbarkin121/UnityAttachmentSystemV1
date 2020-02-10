@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 157b94c0a67f68145b4b8feb33c85546, type: 3}
   m_Name: Hall
   m_EditorClassIdentifier: 
+  name: New Item
   artwork: {fileID: 21300000, guid: 4df08fc81c560cf41b03dcca87d12972, type: 3}
   mass: 1
   hitpoints: 100
   force: 1
-  attachment_point: {x: 0.03, y: 0.01, z: -0.36}
+  attachment_point: {x: 0, y: 0, z: 0}
   thrustOffset: {x: 0, y: 0, z: 0}

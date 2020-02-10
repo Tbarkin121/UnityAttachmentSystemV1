@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 157b94c0a67f68145b4b8feb33c85546, type: 3}
   m_Name: Rocket
   m_EditorClassIdentifier: 
+  name: New Item
   artwork: {fileID: -482130097425260544, guid: 59ba22856931c8349aa675ec02150ba1, type: 3}
   mass: 1
   hitpoints: 100
-  force: 5
-  attachment_point: {x: 0.05, y: -0.08, z: 0}
+  force: 1
+  attachment_point: {x: 0, y: 0, z: 0}
   thrustOffset: {x: 0, y: 0, z: 0}

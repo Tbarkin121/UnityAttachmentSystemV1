@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class ItemSlot : MonoBehaviour
+using UnityEngine.EventSystems;
+using System;
+[System.Serializable]
+public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField]
-    private Image image;
+    [SerializeField] Image image;
+    public event Action<Item> OnRightClickEvent;
     private Item _item;
-    public Item item 
+    public Item item
     {
         get { return _item; }
         set 
@@ -26,7 +28,22 @@ public class ItemSlot : MonoBehaviour
         }
     }
 
-    private void OnValidate()
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData != null && eventData.button == PointerEventData.InputButton.Right)
+        {
+            Debug.Log("How bout Here?");
+            print(item);
+            print(OnRightClickEvent);
+            if (item != null && OnRightClickEvent != null)
+            {
+                Debug.Log("Probably not here...");
+                OnRightClickEvent(item);
+            }
+        }
+    }
+
+    protected virtual void OnValidate()
     {
         if (image == null)
             image = GetComponent<Image>();

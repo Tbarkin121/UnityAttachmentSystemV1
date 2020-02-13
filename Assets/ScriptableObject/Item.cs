@@ -6,6 +6,7 @@ public class Item : ScriptableObject{
     public Sprite artwork = null;
     public int mass;
     public int hitpoints;
+    public int armor;
 
     public virtual void Use ()
     {
@@ -14,9 +15,9 @@ public class Item : ScriptableObject{
 
         Debug.Log ("Using  " + name);
     }
+    
+    protected virtual void Die ()
+    {
 
-    // public void RemoveFromInventory ()
-    // {
-    //     Inventory.instance.Remove(this);
-    // }
+    }
 }

@@ -12,5 +12,3 @@ public class AttachmentPoint
     // public bool damaged = false;
     // public bool occupied = false;
 }
-
-public enum EquipmentType {Thruster, Weapon}

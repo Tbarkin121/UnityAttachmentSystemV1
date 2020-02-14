@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+[System.Serializable]
 public class EquipmentPanel : MonoBehaviour
 {
     [SerializeField] Transform equipmentSlotsParent;
@@ -24,7 +25,7 @@ public class EquipmentPanel : MonoBehaviour
     {
         for (int i = 0; i < equipmentSlots.Length; i++)
         {
-            if(equipmentSlots[i].equipmentType == item.equipmentType)
+            if(equipmentSlots[i].equipmentType == item.equipmentType && equipmentSlots[i].item == null)
             {
                 previousItem = (EquippableItem)equipmentSlots[i].item;
                 equipmentSlots[i].item = item;

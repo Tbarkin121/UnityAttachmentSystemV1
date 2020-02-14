@@ -1326,7 +1326,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 4df08fc81c560cf41b03dcca87d12972,
+      objectReference: {fileID: 2710112820315260905, guid: 59ba22856931c8349aa675ec02150ba1,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5820074e1edfd754ea2a7956ac9b4fc1, type: 3}
@@ -1511,6 +1511,7 @@ MonoBehaviour:
   bodyData: {fileID: 11400000, guid: a2d52cb84f080c7499e4ab15d7fd6c3e, type: 2}
   boosterData: {fileID: 11400000, guid: c42afeebbbcfba64081405545ed3f78e, type: 2}
   weaponData: {fileID: 11400000, guid: 947ffc9bdf6859a43af7a172316f8f2b, type: 2}
+  testsprite: {fileID: 0}
 --- !u!4 &921028599
 Transform:
   m_ObjectHideFlags: 0
@@ -2366,7 +2367,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -8011393075847099815, guid: 524a1ed065583964c9182e347fa94a07,
+      objectReference: {fileID: 2710112820315260905, guid: 59ba22856931c8349aa675ec02150ba1,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5820074e1edfd754ea2a7956ac9b4fc1, type: 3}
@@ -2921,7 +2922,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items:
   - {fileID: 11400000, guid: e058d9ccf284f6a429949fb6945a36de, type: 2}
-  - {fileID: 11400000, guid: 11023d500467f964da5ed2c57d4a5e3f, type: 2}
   itemsParent: {fileID: 765415843}
   itemSlots:
   - {fileID: 464046470}
@@ -3306,7 +3306,7 @@ PrefabInstance:
     - target: {fileID: 1678503937867116903, guid: 5820074e1edfd754ea2a7956ac9b4fc1,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1678503937867116903, guid: 5820074e1edfd754ea2a7956ac9b4fc1,
         type: 3}
@@ -3514,6 +3514,8 @@ MonoBehaviour:
   bodyData: {fileID: 11400000, guid: a2d52cb84f080c7499e4ab15d7fd6c3e, type: 2}
   boosterData: {fileID: 11400000, guid: c42afeebbbcfba64081405545ed3f78e, type: 2}
   weaponData: {fileID: 11400000, guid: 947ffc9bdf6859a43af7a172316f8f2b, type: 2}
+  testsprite: {fileID: 3740793055124171746, guid: 524a1ed065583964c9182e347fa94a07,
+    type: 3}
 --- !u!4 &1899033577
 Transform:
   m_ObjectHideFlags: 0

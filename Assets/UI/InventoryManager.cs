@@ -1,16 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[System.Serializable]
 public class InventoryManager : MonoBehaviour
 {
     
-    [SerializeField] Inventory inventory;
-    [SerializeField] EquipmentPanel equipmentPanel;
-    private void Awake ()
+    public Inventory inventory;
+    public EquipmentPanel equipmentPanel;
+    private bool ak = false;
+    // private void Awake ()
+    // {
+    //     inventory.OnItemRightClickedEvent += EquipFromInventory;
+    //     equipmentPanel.OnItemRightClickedEvent += UnequipFromEquipPanel;
+    // }
+        private void Update ()
     {
-        inventory.OnItemRightClickedEvent += EquipFromInventory;
-        equipmentPanel.OnItemRightClickedEvent += UnequipFromEquipPanel;
+        if(ak == false)
+        {
+            ak = true;
+            inventory.OnItemRightClickedEvent += EquipFromInventory;
+            equipmentPanel.OnItemRightClickedEvent += UnequipFromEquipPanel;
+        }
+        
     }
 
     private void EquipFromInventory(Item item)

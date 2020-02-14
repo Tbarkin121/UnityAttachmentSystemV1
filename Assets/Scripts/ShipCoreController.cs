@@ -24,7 +24,8 @@ public class ShipCoreController : MonoBehaviour
             Debug.Log("Creating " + x.name);
             children.Add(CreateAttachmentPoints(x));
         }
-            
+        EquipmentPanelFlex EPF = gameObject.AddComponent<EquipmentPanelFlex>();
+        
         print("Ship Core Online!");
     }
 

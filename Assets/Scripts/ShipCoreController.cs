@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using UnityEngine;
-using UnityEngine.UI;
+using System;
+
 public class ShipCoreController : VanillaManager
 {
     public Body bodyData;
@@ -17,6 +19,8 @@ public class ShipCoreController : VanillaManager
     private int invtest = 0;
     private int eqtest = 0;
     private int timertest = 0;
+    private bool eventbool = false;
+    // public event Action<Item> OnItemRightClickedEvent;
     
     void Start()
     {
@@ -35,8 +39,19 @@ public class ShipCoreController : VanillaManager
         timertest++;
         if(timertest>=100)
             timertest = 0;
+    }
+
+    private void EquipFromInventory(Item item)
+    {
+        Debug.Log("Test Fun Equip!");
 
     }
+    private void UnequipFromEquipPanel(Item item)
+    {
+        Debug.Log("Test Fun Unequip!");
+
+    }
+
     private void InventoryTest()
     {
         if(timertest == 0)
@@ -78,31 +93,37 @@ public class ShipCoreController : VanillaManager
 
         if(_canvas != null)
         {
+            int i = 0;
             foreach(AttachmentPoint x in attachmentPoints)            
             {
                 Transform _characterPanel = _canvas.transform.Find("Character Panel");
                 Transform _parent = _characterPanel.Find("Equipment Panel");
-                GameObject AttachmentTest = CreatePanel("AttachmentTest", _parent);
+                GameObject AttachmentTest = CreatePanel("Attachment Point " + i, _parent);
                 EquipmentSlotFlex equipmentSlot = AttachmentTest.AddComponent<EquipmentSlotFlex>();
                 equipmentSlots.Add(equipmentSlot);
+                equipmentSlot.OnRightClickEvent += UnequipFromEquipPanel;
                 ScalePanel(AttachmentTest, 128, 128);
                 MovePanel(AttachmentTest, 0, 0);
                 Sprite sp = Resources.Load<Sprite>("UI/EquipmentButton");
                 SetPanelSprite(AttachmentTest, sp);
+                i++;
                 
             }
 
+            i = 0;
             foreach(Item x in items)
             {
                 Transform _characterPanel = _canvas.transform.Find("Character Panel");
                 Transform _parent = _characterPanel.Find("Inventory Panel");
-                GameObject AttachmentTest = CreatePanel("InventorySlotTest", _parent);
+                GameObject AttachmentTest = CreatePanel("Inventory Slot " + i, _parent);
                 ItemSlotFlex itemSlot = AttachmentTest.AddComponent<ItemSlotFlex>();
                 itemSlots.Add(itemSlot);
+                itemSlot.OnRightClickEvent += EquipFromInventory;
                 ScalePanel(AttachmentTest, 128, 128);
                 MovePanel(AttachmentTest, 0, 0);
                 Sprite sp = Resources.Load<Sprite>("UI/InventoryButton");
                 SetPanelSprite(AttachmentTest, sp);
+                i++;
                 
             }
         }

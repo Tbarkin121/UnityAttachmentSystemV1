@@ -42,12 +42,8 @@ public class ItemSlotFlex : MonoBehaviour, IPointerClickHandler
     {
         if (eventData != null && eventData.button == PointerEventData.InputButton.Right)
         {
-            Debug.Log("How bout Here?");
-            print(item);
-            print(OnRightClickEvent);
             if (item != null && OnRightClickEvent != null)
             {
-                Debug.Log("Probably not here...");
                 OnRightClickEvent(item);
             }
         }

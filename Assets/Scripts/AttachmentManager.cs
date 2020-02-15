@@ -25,6 +25,7 @@ public class AttachmentManager : MonoBehaviour
             {
                 sr.sprite = weaponData.artwork;
             }
+            sr.sortingOrder = 1;
         }
         maxHitpoints = boosterData.hitpoints;
         currentHitpoints = maxHitpoints;

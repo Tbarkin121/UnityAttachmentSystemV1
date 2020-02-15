@@ -1483,7 +1483,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &921028597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1511,7 +1511,9 @@ MonoBehaviour:
   bodyData: {fileID: 11400000, guid: a2d52cb84f080c7499e4ab15d7fd6c3e, type: 2}
   boosterData: {fileID: 11400000, guid: c42afeebbbcfba64081405545ed3f78e, type: 2}
   weaponData: {fileID: 11400000, guid: 947ffc9bdf6859a43af7a172316f8f2b, type: 2}
-  testsprite: {fileID: 0}
+  inventoryPanelImage: {fileID: 21300000, guid: 905f44ce485136041bdb823831d983e3,
+    type: 3}
+  menuX: 512
 --- !u!4 &921028599
 Transform:
   m_ObjectHideFlags: 0
@@ -3514,8 +3516,9 @@ MonoBehaviour:
   bodyData: {fileID: 11400000, guid: a2d52cb84f080c7499e4ab15d7fd6c3e, type: 2}
   boosterData: {fileID: 11400000, guid: c42afeebbbcfba64081405545ed3f78e, type: 2}
   weaponData: {fileID: 11400000, guid: 947ffc9bdf6859a43af7a172316f8f2b, type: 2}
-  testsprite: {fileID: 3740793055124171746, guid: 524a1ed065583964c9182e347fa94a07,
+  inventoryPanelImage: {fileID: 21300000, guid: 905f44ce485136041bdb823831d983e3,
     type: 3}
+  menuX: -512
 --- !u!4 &1899033577
 Transform:
   m_ObjectHideFlags: 0

@@ -10,6 +10,8 @@ public class EquippableItem : Item
     public Vector3 attachmentPoint;
     public Vector2 colliderSize;
     public EquipmentType equipmentType;
+    public float perferationPower;
+    public float perferationResistance;
 
 }
 

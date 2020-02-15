@@ -1,37 +1,116 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class ShipCoreController : MonoBehaviour
+using UnityEngine.UI;
+public class ShipCoreController : VanillaManager
 {
     public Body bodyData;
     public Thruster boosterData;
     public Item weaponData;
     public List<AttachmentPoint> attachmentPoints;
+    public List<ItemSlotFlex> itemSlots;
+    public List<EquipmentSlotFlex> equipmentSlots;
+    // public List<> equipmentSlots;
+    private List<Item> items;
     public Rigidbody2D rb;
     private List<GameObject> children;
+    private int invtest = 0;
+    private int eqtest = 0;
+    private int timertest = 0;
     
     void Start()
     {
-        children = new List<GameObject>();
-
         rb = gameObject.GetComponent<Rigidbody2D>();
-        SpriteRenderer sr = gameObject.AddComponent<SpriteRenderer>();
-        sr.sprite = bodyData.artwork;
-        attachmentPoints = bodyData.attachmentPoints;
         foreach(AttachmentPoint x in attachmentPoints)
         {
             Debug.Log("Creating " + x.name);
             children.Add(CreateAttachmentPoints(x));
         }
-        EquipmentPanelFlex EPF = gameObject.AddComponent<EquipmentPanelFlex>();
         
+    }
+    void Update()
+    {
+        InventoryTest();
+        EquipmentTest();
+        timertest++;
+        if(timertest>=100)
+            timertest = 0;
+
+    }
+    private void InventoryTest()
+    {
+        if(timertest == 0)
+        {
+            for(int i = 0; i<=9; i++)
+            {
+                itemSlots[i].item = null;
+            }
+            itemSlots[invtest].item = items[0];
+            invtest++;
+            if(invtest>=10)
+                invtest = 0;
+        }
+    }
+    private void EquipmentTest()
+    {
+        if(timertest == 0)
+        {
+            for(int i = 0; i<=2; i++)
+            {
+                equipmentSlots[i].item = null;
+            }
+            equipmentSlots[eqtest].item = items[0];
+            eqtest++;
+            if(eqtest>=3)
+                eqtest = 0;
+        }
+    }
+    public void StartUI(Canvas _canvas)
+    {
+        children = new List<GameObject>();
+        
+        SpriteRenderer sr = gameObject.AddComponent<SpriteRenderer>();
+        sr.sprite = bodyData.artwork;
+        attachmentPoints = bodyData.attachmentPoints;
+        items = bodyData.items;
+        itemSlots = new List<ItemSlotFlex>();
+        equipmentSlots = new List<EquipmentSlotFlex>();
+
+        if(_canvas != null)
+        {
+            foreach(AttachmentPoint x in attachmentPoints)            
+            {
+                Transform _characterPanel = _canvas.transform.Find("Character Panel");
+                Transform _parent = _characterPanel.Find("Equipment Panel");
+                GameObject AttachmentTest = CreatePanel("AttachmentTest", _parent);
+                EquipmentSlotFlex equipmentSlot = AttachmentTest.AddComponent<EquipmentSlotFlex>();
+                equipmentSlots.Add(equipmentSlot);
+                ScalePanel(AttachmentTest, 128, 128);
+                MovePanel(AttachmentTest, 0, 0);
+                Sprite sp = Resources.Load<Sprite>("UI/EquipmentButton");
+                SetPanelSprite(AttachmentTest, sp);
+                
+            }
+
+            foreach(Item x in items)
+            {
+                Transform _characterPanel = _canvas.transform.Find("Character Panel");
+                Transform _parent = _characterPanel.Find("Inventory Panel");
+                GameObject AttachmentTest = CreatePanel("InventorySlotTest", _parent);
+                ItemSlotFlex itemSlot = AttachmentTest.AddComponent<ItemSlotFlex>();
+                itemSlots.Add(itemSlot);
+                ScalePanel(AttachmentTest, 128, 128);
+                MovePanel(AttachmentTest, 0, 0);
+                Sprite sp = Resources.Load<Sprite>("UI/InventoryButton");
+                SetPanelSprite(AttachmentTest, sp);
+                
+            }
+        }
         print("Ship Core Online!");
     }
 
     GameObject CreateAttachmentPoints (AttachmentPoint _attachmentPoint)
     {
-
         GameObject attachmentPoint = new GameObject();
         attachmentPoint.name = _attachmentPoint.name;
         attachmentPoint.transform.SetParent(transform);
@@ -72,5 +151,4 @@ public class ShipCoreController : MonoBehaviour
     {
         children.Remove(_gameObject);
     }
-
 }

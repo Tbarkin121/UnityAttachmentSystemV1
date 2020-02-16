@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 public class ShipCoreController : VanillaManager
@@ -14,7 +15,84 @@ public class ShipCoreController : VanillaManager
     private List<GameObject> physicalAttachmentPoints;
     public InventoryFlex inventory;
     public EquipmentFlex equipment;
-    
+    private Image draggableItem; //Need to create this still.. should just be a panel like the rest of them
+    private ItemSlotFlex draggedSlot;
+
+    private void Awake ()
+    {
+        GameObject draggableObject = CreatePanel("Draggable Item", transform);
+        ScalePanel(draggableObject, 128, 128);
+        draggableItem = draggableObject.GetComponent<Image>();
+        draggableItem.enabled = false;
+        //Setup Events:
+        
+    }    
+    private void Equip(ItemSlotFlex itemSlot)
+    {
+        EquippableItem equippableItem = itemSlot.item as EquippableItem;
+        if (equippableItem != null)
+        {
+            // int _slotNum;
+            Equip(equippableItem);
+        }
+    }
+    private void Unequip(ItemSlotFlex itemSlot)
+    {
+        EquippableItem equippableItem = itemSlot.item as EquippableItem;
+        if (equippableItem != null)
+        {
+            Unequip(equippableItem);
+        }
+    }
+    private void BeginDrag(ItemSlotFlex itemSlot)
+    {
+        if (itemSlot.item != null)
+        {
+            draggedSlot = itemSlot;
+            draggableItem.sprite = itemSlot.item.artwork;
+            draggableItem.transform.position = Input.mousePosition;
+            draggableItem.enabled = true;
+        }
+    }
+    private void EndDrag(ItemSlotFlex itemSlot)
+    {
+        draggedSlot = null;
+        draggableItem.enabled = false;
+
+    }
+    private void Drag(ItemSlotFlex itemSlot)
+    {
+        if (draggableItem.enabled)
+        {
+            draggableItem.transform.position = Input.mousePosition;
+        }
+        
+    }
+    private void Drop(ItemSlotFlex dropitemSlot)
+    {
+        if (dropitemSlot.CanReceiveItem(draggedSlot.item) && draggedSlot.CanReceiveItem(dropitemSlot.item))
+        {
+            EquippableItem dragItem = draggedSlot.item as EquippableItem;
+            EquippableItem dropItem = dropitemSlot.item as EquippableItem;
+            
+            if (draggedSlot is EquipmentSlotFlex)
+            {
+                if (dragItem != null) Unequip(dragItem);
+                if (dropItem != null) Equip(dropItem);
+            }
+            if (dropitemSlot is EquipmentSlotFlex)
+            {
+                if (dragItem != null) Equip(dragItem);
+                if (dropItem != null) Unequip(dropItem);
+            }
+
+            Item draggedItem = draggedSlot.item;
+            draggedSlot.item = dropitemSlot.item;
+            dropitemSlot.item = draggedItem;
+        }
+        
+
+    }
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -25,37 +103,46 @@ public class ShipCoreController : VanillaManager
         
     }
 
-    private void EquipFromInventory(Item item, int _slotNum)
-    {
-        Debug.Log("Test Fun Equip!");
-        if (item is EquippableItem)
-        {
-            Equip((EquippableItem)item, out _slotNum);
-            Debug.Log("Slot Num : " + _slotNum);
-            if(_slotNum>=0 && _slotNum<=2)
-            {
-                physicalAttachmentPoints[_slotNum].GetComponent<AttachmentManager>().UpdateEquipment((EquippableItem)item);
-            }
-            
-        }
+    // public void Equip(EquippableItem item, out int _slotNum)
+    // {
+
+    //     if (inventory.RemoveItem(item))
+    //     {
+    //         EquippableItem previousItem;
+    //         if (equipment.AddItem(item, out previousItem, out _slotNum))
+    //         {
+    //             if (previousItem != null)
+    //             {
+    //                 inventory.AddItem(previousItem);
+    //             }
+    //         }
+    //         else
+    //         {
+    //             inventory.AddItem(item);
+    //         }
+    //     }
+    //     else
+    //     {
+    //         _slotNum = -1;
+    //     }
         
-    }
-    private void UnequipFromEquipPanel(Item item, int _slotNum)
-    {
-        Debug.Log("Test Fun Unequip!");
-        if (item is EquippableItem)
-        {
-            Unequip((EquippableItem)item, _slotNum);
-            physicalAttachmentPoints[_slotNum].GetComponent<AttachmentManager>().UpdateEquipment(null);
-        }
-    }
-    public void Equip(EquippableItem item, out int _slotNum)
+    // }
+
+    // public void Unequip(EquippableItem item, int _slotNum)
+    // {
+    //     Debug.Log("Slot Num : " + _slotNum);
+    //     if (!inventory.IsFull() && equipment.RemoveItem(item, _slotNum))
+    //     {
+    //         inventory.AddItem(item);
+    //     }
+    // }
+    public void Equip(EquippableItem item)
     {
 
         if (inventory.RemoveItem(item))
         {
             EquippableItem previousItem;
-            if (equipment.AddItem(item, out previousItem, out _slotNum))
+            if (equipment.AddItem(item, out previousItem))
             {
                 if (previousItem != null)
                 {
@@ -67,17 +154,11 @@ public class ShipCoreController : VanillaManager
                 inventory.AddItem(item);
             }
         }
-        else
-        {
-            _slotNum = -1;
-        }
-        
     }
 
-    public void Unequip(EquippableItem item, int _slotNum)
+    public void Unequip(EquippableItem item)
     {
-        Debug.Log("Slot Num : " + _slotNum);
-        if (!inventory.IsFull() && equipment.RemoveItem(item, _slotNum))
+        if (!inventory.IsFull() && equipment.RemoveItem(item))
         {
             inventory.AddItem(item);
         }
@@ -96,15 +177,26 @@ public class ShipCoreController : VanillaManager
         Transform _equipmentParent = _characterPanel.Find("Equipment Panel");
         if(_canvas != null)
         {
-
             equipment = _equipmentParent.GetComponent<EquipmentFlex>();
-            equipment.OnItemRightClickedEvent += UnequipFromEquipPanel;
-            equipment.ManualStart(bodyData.attachmentPoints);
-
             inventory = _inventoryParent.GetComponent<InventoryFlex>();
-            inventory.OnItemRightClickedEvent += EquipFromInventory;
+            //Right Click
+            inventory.OnRightClickEvent += Equip;
+            equipment.OnRightClickEvent += Unequip;
+            //Begin Drag
+            inventory.OnBeginDragEvent += BeginDrag;
+            equipment.OnBeginDragEvent += BeginDrag;
+            //End Drag
+            inventory.OnEndDragEvent += EndDrag;
+            equipment.OnEndDragEvent += EndDrag;
+            //Drag
+            inventory.OnDragEvent += Drag;
+            equipment.OnDragEvent += Drag;
+            //Drop
+            inventory.OnDragEvent += Drop;
+            equipment.OnDragEvent += Drop;
+            
+            equipment.ManualStart(bodyData.attachmentPoints);
             inventory.ManualStart(bodyData);
-
         }
         print("Ship Core Online!");
     }

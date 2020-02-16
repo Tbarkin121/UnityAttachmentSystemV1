@@ -6,38 +6,46 @@ using System;
 [System.Serializable]
 public class InventoryFlex : VanillaManager
 {
-    public List<Item> items;
+    public List<Item> startingItems;
     public List<ItemSlotFlex> itemSlots;
-    public event Action<Item, int> OnItemRightClickedEvent;
+    public event Action<ItemSlotFlex> OnRightClickEvent;
+    public event Action<ItemSlotFlex> OnBeginDragEvent;
+    public event Action<ItemSlotFlex> OnEndDragEvent;
+    public event Action<ItemSlotFlex> OnDragEvent;
+    public event Action<ItemSlotFlex> OnDropEvent;
     private void Awake()
     {
-        items = new List<Item>();
+        startingItems = new List<Item>();
         itemSlots = new List<ItemSlotFlex>();
     }
 
     public void ManualStart (Body _bodyData)
     {
-        items = _bodyData.items;
+        startingItems = _bodyData.items;
         for (int i = 0; i < _bodyData.numInventorySlots; i++)
         {
             GameObject AttachmentTest = CreatePanel("Inventory Slot " + i, transform);
             ItemSlotFlex itemSlot = AttachmentTest.AddComponent<ItemSlotFlex>();
             itemSlot.slotNum = i;
+            itemSlot.OnRightClickEvent += OnRightClickEvent;
+            itemSlot.OnBeginDragEvent += OnBeginDragEvent;
+            itemSlot.OnEndDragEvent += OnEndDragEvent;
+            itemSlot.OnDragEvent += OnDragEvent;
+            itemSlot.OnDropEvent += OnDropEvent;
             itemSlots.Add(itemSlot);
-            itemSlot.OnRightClickEvent += OnItemRightClickedEvent;
             ScalePanel(AttachmentTest, 128, 128);
             MovePanel(AttachmentTest, 0, 0);
             Sprite sp = Resources.Load<Sprite>("UI/InventoryButton");
             SetPanelSprite(AttachmentTest, sp);
         }
-        RefreshUI();
+        SetStartingItems();
     }
-    public virtual void RefreshUI ()
+    public virtual void SetStartingItems ()
     {
         int i = 0;
-        for (; i < items.Count && i<itemSlots.Count; i++)
+        for (; i < startingItems.Count && i<itemSlots.Count; i++)
         {
-            itemSlots[i].item = items[i];
+            itemSlots[i].item = startingItems[i];
         }
         for (; i < itemSlots.Count; i++)
         {
@@ -45,25 +53,62 @@ public class InventoryFlex : VanillaManager
         }
     
     }
+    // public bool AddItem (Item item)
+    // {
+    //     if (IsFull())
+    //         return false;
+    //     items.Add(item);
+    //     RefreshUI();
+    //     return true; 
+    // }
+    // public bool RemoveItem(Item item)
+    // {
+    //     if(items.Remove(item))
+    //     {
+    //         RefreshUI();
+    //         return true;
+    //     }
+    //     return false;
+    // }
+    // public bool IsFull()
+    // {
+    //     return items.Count >= itemSlots.Count;
+    // }
     public bool AddItem (Item item)
     {
-        if (IsFull())
-            return false;
-        items.Add(item);
-        RefreshUI();
-        return true; 
-    }
-    public bool RemoveItem(Item item)
-    {
-        if(items.Remove(item))
+        for (int i = 0; i < itemSlots.Count; i++)
         {
-            RefreshUI();
-            return true;
+            if(itemSlots[i].item = null)
+            {
+                itemSlots[i].item = item;
+                return true;
+            }
         }
         return false;
     }
+
+    public bool RemoveItem(Item item)
+    {
+        for (int i = 0; i < itemSlots.Count; i++)
+        {
+            if(itemSlots[i].item = item)
+            {
+                itemSlots[i].item = null;
+                return true;
+            }
+        }
+        return false;
+    }
+
     public bool IsFull()
     {
-        return items.Count >= itemSlots.Count;
+        for (int i = 0; i < itemSlots.Count; i++)
+        {
+            if(itemSlots[i].item = null)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

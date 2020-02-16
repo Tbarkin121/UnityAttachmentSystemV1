@@ -40,7 +40,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e058d9ccf284f6a429949fb6945a36de, type: 2}
   - {fileID: 11400000, guid: e058d9ccf284f6a429949fb6945a36de, type: 2}
   - {fileID: 11400000, guid: e058d9ccf284f6a429949fb6945a36de, type: 2}
-  - {fileID: 11400000, guid: e058d9ccf284f6a429949fb6945a36de, type: 2}
   drag: 1
   angularDrag: 1
   colliderSize: {x: 0.25, y: 0.25}

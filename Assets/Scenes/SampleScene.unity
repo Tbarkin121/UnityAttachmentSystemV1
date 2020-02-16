@@ -1509,9 +1509,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyData: {fileID: 11400000, guid: a2d52cb84f080c7499e4ab15d7fd6c3e, type: 2}
-  boosterData: {fileID: 11400000, guid: c42afeebbbcfba64081405545ed3f78e, type: 2}
-  weaponData: {fileID: 11400000, guid: 947ffc9bdf6859a43af7a172316f8f2b, type: 2}
   menuX: 512
+  item: {fileID: 0}
 --- !u!4 &921028599
 Transform:
   m_ObjectHideFlags: 0
@@ -3512,9 +3511,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyData: {fileID: 11400000, guid: a2d52cb84f080c7499e4ab15d7fd6c3e, type: 2}
-  boosterData: {fileID: 11400000, guid: c42afeebbbcfba64081405545ed3f78e, type: 2}
-  weaponData: {fileID: 11400000, guid: 947ffc9bdf6859a43af7a172316f8f2b, type: 2}
   menuX: -512
+  item: {fileID: 11400000, guid: e058d9ccf284f6a429949fb6945a36de, type: 2}
 --- !u!4 &1899033577
 Transform:
   m_ObjectHideFlags: 0

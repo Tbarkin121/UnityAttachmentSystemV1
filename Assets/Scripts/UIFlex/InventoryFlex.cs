@@ -8,26 +8,12 @@ public class InventoryFlex : VanillaManager
 {
     public List<Item> items;
     public List<ItemSlotFlex> itemSlots;
-    public event Action<Item> OnItemRightClickedEvent;
+    public event Action<Item, int> OnItemRightClickedEvent;
     private void Awake()
     {
         items = new List<Item>();
         itemSlots = new List<ItemSlotFlex>();
-
-
-        // Debug.Log(itemSlots.Length);
-        // for (int i = 0; i < itemSlots.Length; i++)
-        // {
-        //     itemSlots[i].OnRightClickEvent += OnItemRightClickedEvent; //This chains together the right click on the item slot with the inventory manager equip call... beautiful
-        // }
     }
-
-    // private void OnValidate ()
-    // {
-    //     if (itemsParent != null)
-    //         itemSlots = itemsParent.GetComponentsInChildren<ItemSlot>();
-    //     RefreshUI();
-    // }
 
     public void ManualStart (Body _bodyData)
     {
@@ -36,6 +22,7 @@ public class InventoryFlex : VanillaManager
         {
             GameObject AttachmentTest = CreatePanel("Inventory Slot " + i, transform);
             ItemSlotFlex itemSlot = AttachmentTest.AddComponent<ItemSlotFlex>();
+            itemSlot.slotNum = i;
             itemSlots.Add(itemSlot);
             itemSlot.OnRightClickEvent += OnItemRightClickedEvent;
             ScalePanel(AttachmentTest, 128, 128);

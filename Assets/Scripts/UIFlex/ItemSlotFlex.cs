@@ -8,9 +8,10 @@ using System;
 public class ItemSlotFlex : MonoBehaviour, IPointerClickHandler
 {
     private Image image;
-    public event Action<Item> OnRightClickEvent;
+    public event Action<Item, int> OnRightClickEvent;
     private Item _item;
     private GameObject itemDisplay;
+    public int slotNum;
     public Item item
     {
         get { return _item; }
@@ -44,7 +45,7 @@ public class ItemSlotFlex : MonoBehaviour, IPointerClickHandler
         {
             if (item != null && OnRightClickEvent != null)
             {
-                OnRightClickEvent(item);
+                OnRightClickEvent(item, slotNum);
             }
         }
     }

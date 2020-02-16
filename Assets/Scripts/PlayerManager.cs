@@ -5,14 +5,13 @@ using UnityEngine.UI;
 public class PlayerManager : VanillaManager
 {
     public Body bodyData;
-    public Thruster boosterData;
-    public Item weaponData;
     private GameObject shipCore;
     GameObject shipControlCore;
     private GameObject mCanvas;
     Color pink = new Color(1f,0f,1f,1f);
     Color purple = new Color(0.25f,0f,0.5f,1f);
     public int menuX = -512;
+    public EquippableItem item;
 
     void Start ()
     {
@@ -36,7 +35,7 @@ public class PlayerManager : VanillaManager
         InventoryPanel.AddComponent<InventoryFlex>();
         EquipmentPanel.AddComponent<EquipmentFlex>();
 
-        //
+        //Arranging Panel Pieces
         ColorPanel(CharacterPanel, purple);
         ScalePanel(CharacterPanel, 512, 1024);
         MovePanel(CharacterPanel, menuX, 0);
@@ -58,15 +57,12 @@ public class PlayerManager : VanillaManager
     {
         if(shipCore == null)
         {
-            shipCore = new GameObject();
-            shipCore.name = "Ship Core";
+            shipCore = new GameObject("Ship Core");
             shipCore.transform.SetParent(transform);
             shipCore.transform.localPosition = Vector3.zero;
             shipCore.transform.rotation = Quaternion.identity;
             ShipCoreController scController = shipCore.AddComponent<ShipCoreController>();
             scController.bodyData = bodyData;
-            scController.boosterData = boosterData;
-            scController.weaponData = weaponData;
             scController.StartUI(_canvas);
             Rigidbody2D rb = shipCore.AddComponent<Rigidbody2D>();
             rb.gravityScale = 0;
@@ -106,10 +102,9 @@ public class PlayerManager : VanillaManager
         {
             shipCore.GetComponent<ShipCoreController>().CPU(0.0f, -1.0f);
         }
-        if(Input.GetKeyDown(KeyCode.V))
+        if(Input.GetKeyDown(KeyCode.C))
         {
-            shipCore.GetComponent<ShipCoreController>().TestDamage(25);
-            
+            shipCore.GetComponent<ShipCoreController>().TestDamage(25);   
         }
         
     }

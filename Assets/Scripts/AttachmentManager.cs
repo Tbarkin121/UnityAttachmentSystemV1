@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class AttachmentManager : MonoBehaviour
 {
-    public Thruster boosterData;
-    public Item weaponData;
+    public EquippableItem item;
     public EquipmentType equipmentType;
     public Rigidbody2D ship_rb;
     public float maxHitpoints;
@@ -16,42 +15,46 @@ public class AttachmentManager : MonoBehaviour
     void Start()
     {
         SpriteRenderer sr = gameObject.AddComponent<SpriteRenderer>();
+        UpdateEquipment(item);
+        
+    }
+    public void UpdateEquipment (EquippableItem _item)
+    {
+        SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();
+        if(_item != null)
         {
-            if (equipmentType == EquipmentType.Thruster)
-            {
-                sr.sprite = boosterData.artwork;
-            }
-            else
-            {
-                sr.sprite = weaponData.artwork;
-            }
+            item = _item;
+            sr.sprite = item.artwork;
+            sr.enabled = true;
             sr.sortingOrder = 1;
+            currentHitpoints = item.hitpoints;
         }
-        maxHitpoints = boosterData.hitpoints;
-        currentHitpoints = maxHitpoints;
-        
-        
+        else
+        {
+            item = null;
+            sr.enabled = false;
+        }
     }
 
     // Update is called once per frame
     public void RequestForce(float _force)
     {
-        if(equipmentType == EquipmentType.Thruster)
+        if(item != null && item.equipmentType == EquipmentType.Thruster)
         {
-            float appliedForce = Mathf.Clamp(_force, -boosterData.force, boosterData.force); 
+            float appliedForce = Mathf.Clamp(_force, -item.maxForce, item.maxForce); 
             ship_rb.AddForce(transform.up*appliedForce);
-            ship_rb.AddTorque((transform.localPosition.x+boosterData.thrustOffset.x)*appliedForce);
+            ship_rb.AddTorque((transform.localPosition.x+item.forceOffset.x)*appliedForce);
         }
         
     }
     public void RequestTurn(float _force)
     {
-        if(equipmentType == EquipmentType.Thruster)
+        if(item != null && item.equipmentType == EquipmentType.Thruster)
         {
             _force *= Mathf.Sign(transform.localPosition.x);
-            float appliedForce = Mathf.Clamp(_force, -boosterData.force, boosterData.force); 
+            float appliedForce = Mathf.Clamp(_force, -item.maxForce, item.maxForce); 
             ship_rb.AddForce(transform.up*appliedForce);
-            ship_rb.AddTorque((transform.localPosition.x+boosterData.thrustOffset.x)*appliedForce);
+            ship_rb.AddTorque((transform.localPosition.x+item.forceOffset.x)*appliedForce);
         }
         
     }

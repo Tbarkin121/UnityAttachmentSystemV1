@@ -18,90 +18,11 @@ public class ShipCoreController : VanillaManager
     private Image draggableItem; //Need to create this still.. should just be a panel like the rest of them
     private ItemSlotFlex draggedSlot;
 
-    private void Awake ()
-    {
-        GameObject draggableObject = CreatePanel("Draggable Item", transform);
-        ScalePanel(draggableObject, 128, 128);
-        draggableItem = draggableObject.GetComponent<Image>();
-        draggableItem.enabled = false;
-        //Setup Events:
+    // private void Awake ()
+    // {
         
-    }    
-    private void Equip(ItemSlotFlex itemSlot)
-    {
-        EquippableItem equippableItem = itemSlot.item as EquippableItem;
-        if (equippableItem != null)
-        {
-            // int _slotNum;
-            Equip(equippableItem);
-        }
-    }
-    private void Unequip(ItemSlotFlex itemSlot)
-    {
-        EquippableItem equippableItem = itemSlot.item as EquippableItem;
-        if (equippableItem != null)
-        {
-            Unequip(equippableItem);
-        }
-    }
-    private void BeginDrag(ItemSlotFlex itemSlot)
-    {
-        if (itemSlot.item != null)
-        {
-            draggedSlot = itemSlot;
-            draggableItem.sprite = itemSlot.item.artwork;
-            draggableItem.transform.position = Input.mousePosition;
-            draggableItem.enabled = true;
-        }
-    }
-    private void EndDrag(ItemSlotFlex itemSlot)
-    {
-        draggedSlot = null;
-        draggableItem.enabled = false;
-
-    }
-    private void Drag(ItemSlotFlex itemSlot)
-    {
-        if (draggableItem.enabled)
-        {
-            draggableItem.transform.position = Input.mousePosition;
-        }
         
-    }
-    private void Drop(ItemSlotFlex dropitemSlot)
-    {
-        if (dropitemSlot.CanReceiveItem(draggedSlot.item) && draggedSlot.CanReceiveItem(dropitemSlot.item))
-        {
-            EquippableItem dragItem = draggedSlot.item as EquippableItem;
-            EquippableItem dropItem = dropitemSlot.item as EquippableItem;
-            
-            if (draggedSlot is EquipmentSlotFlex)
-            {
-                if (dragItem != null) Unequip(dragItem);
-                if (dropItem != null) Equip(dropItem);
-            }
-            if (dropitemSlot is EquipmentSlotFlex)
-            {
-                if (dragItem != null) Equip(dragItem);
-                if (dropItem != null) Unequip(dropItem);
-            }
-
-            Item draggedItem = draggedSlot.item;
-            draggedSlot.item = dropitemSlot.item;
-            dropitemSlot.item = draggedItem;
-        }
-        
-
-    }
-    void Start()
-    {
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        foreach(AttachmentPoint x in attachmentPoints)
-        {
-            physicalAttachmentPoints.Add(CreateAttachmentPoints(x));
-        }
-        
-    }
+    // }   
 
     // public void Equip(EquippableItem item, out int _slotNum)
     // {
@@ -136,6 +57,15 @@ public class ShipCoreController : VanillaManager
     //         inventory.AddItem(item);
     //     }
     // }
+    private void Equip(ItemSlotFlex itemSlot)
+    {
+        EquippableItem equippableItem = itemSlot.item as EquippableItem;
+        if (equippableItem != null)
+        {
+            // int _slotNum;
+            Equip(equippableItem);
+        }
+    }
     public void Equip(EquippableItem item)
     {
 
@@ -155,7 +85,14 @@ public class ShipCoreController : VanillaManager
             }
         }
     }
-
+    private void Unequip(ItemSlotFlex itemSlot)
+    {
+        EquippableItem equippableItem = itemSlot.item as EquippableItem;
+        if (equippableItem != null)
+        {
+            Unequip(equippableItem);
+        }
+    }
     public void Unequip(EquippableItem item)
     {
         if (!inventory.IsFull() && equipment.RemoveItem(item))
@@ -163,6 +100,74 @@ public class ShipCoreController : VanillaManager
             inventory.AddItem(item);
         }
     }
+
+    
+    
+    private void BeginDrag(ItemSlotFlex itemSlot)
+    {
+        Debug.Log("SSC : BeginDrag");
+        if (itemSlot.item != null)
+        {
+            draggedSlot = itemSlot;
+            draggableItem.sprite = itemSlot.item.artwork;
+            draggableItem.transform.position = Input.mousePosition;
+            draggableItem.enabled = true;
+        }
+    }
+    private void EndDrag(ItemSlotFlex itemSlot)
+    {
+        Debug.Log("SSC : EndDrag");
+        draggedSlot = null;
+        draggableItem.enabled = false;
+
+    }
+    private void Drag(ItemSlotFlex itemSlot)
+    {
+        Debug.Log("SSC : Drag");
+        if (draggableItem.enabled)
+        {
+            draggableItem.transform.position = Input.mousePosition;
+        }
+        
+    }
+    private void Drop(ItemSlotFlex dropitemSlot)
+    {
+        Debug.Log("DropItem " + dropitemSlot.CanReceiveItem(draggedSlot.item));
+        Debug.Log("DragItem " + draggedSlot.CanReceiveItem(dropitemSlot.item));
+        if (dropitemSlot.CanReceiveItem(draggedSlot.item) && draggedSlot.CanReceiveItem(dropitemSlot.item))
+        {
+            EquippableItem dragItem = draggedSlot.item as EquippableItem;
+            EquippableItem dropItem = dropitemSlot.item as EquippableItem;
+            
+            if (draggedSlot is EquipmentSlotFlex)
+            {
+                if (dragItem != null) Unequip(dragItem);
+                if (dropItem != null) Equip(dropItem);
+            }
+            if (dropitemSlot is EquipmentSlotFlex)
+            {
+                if (dragItem != null) Equip(dragItem);
+                if (dropItem != null) Unequip(dropItem);
+            }
+
+            Item draggedItem = draggedSlot.item;
+            draggedSlot.item = dropitemSlot.item;
+            dropitemSlot.item = draggedItem;
+        }
+        
+
+    }
+    void Start()
+    {
+        rb = gameObject.GetComponent<Rigidbody2D>();
+        foreach(AttachmentPoint x in attachmentPoints)
+        {
+            physicalAttachmentPoints.Add(CreateAttachmentPoints(x));
+        }
+        
+    }
+
+    
     
     public void StartUI(Canvas _canvas)
     {
@@ -192,12 +197,19 @@ public class ShipCoreController : VanillaManager
             inventory.OnDragEvent += Drag;
             equipment.OnDragEvent += Drag;
             //Drop
-            inventory.OnDragEvent += Drop;
-            equipment.OnDragEvent += Drop;
+            inventory.OnDropEvent += Drop;
+            equipment.OnDropEvent += Drop;
             
             equipment.ManualStart(bodyData.attachmentPoints);
             inventory.ManualStart(bodyData);
         }
+        // Create Dragable Object for drag and drop functionality;
+        GameObject draggableObject = CreatePanel("Draggable Item", _characterPanel);
+        ScalePanel(draggableObject, 100, 100);
+        draggableItem = draggableObject.GetComponent<Image>();
+        draggableItem.enabled = false;
+        draggableItem.raycastTarget = false;
+
         print("Ship Core Online!");
     }
 

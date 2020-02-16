@@ -45,13 +45,15 @@ public class ItemSlotFlex : MonoBehaviour, IPointerClickHandler, IDragHandler, I
         itemDisplay.transform.localPosition = new Vector3(0, 0, 0);
         image = itemDisplay.AddComponent<Image>();
         image.sprite = null;
-        image.enabled = false;
+        image.color = disabledColor;
+        image.enabled = true;
     }
 
     public virtual bool CanReceiveItem(Item item)
     {
         return true;
     }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData != null && eventData.button == PointerEventData.InputButton.Right)
@@ -65,24 +67,30 @@ public class ItemSlotFlex : MonoBehaviour, IPointerClickHandler, IDragHandler, I
     Vector2 origionalPosition;
     public void OnBeginDrag(PointerEventData eventData)
     {
+        Debug.Log("Begin Drag " + OnBeginDragEvent);
         if (OnBeginDragEvent != null)
             OnBeginDragEvent(this);
         // origionalPosition = image.transform.position;
     }
+    
     public void OnEndDrag(PointerEventData eventData)
     {
+        Debug.Log("End Drag " + OnEndDragEvent);
         if (OnEndDragEvent != null)
             OnEndDragEvent(this);
         // image.transform.position = origionalPosition;
     }
     public void OnDrag(PointerEventData eventData)
     {
+        Debug.Log("On Drag " + OnDragEvent);
         if (OnDragEvent != null)
             OnDragEvent(this);
         // image.transform.position = Input.mousePosition;
     }
     public void OnDrop(PointerEventData eventData)
     {
+        Debug.Log("Did we even make it here?");
+        Debug.Log("On Drop " + OnDropEvent);
         if (OnDropEvent != null)
             OnDropEvent(this);
     }

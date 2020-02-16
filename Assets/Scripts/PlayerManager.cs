@@ -10,7 +10,6 @@ public class PlayerManager : VanillaManager
     private GameObject shipCore;
     GameObject shipControlCore;
     private GameObject mCanvas;
-    public Sprite inventoryPanelImage;
     Color pink = new Color(1f,0f,1f,1f);
     Color purple = new Color(0.25f,0f,0.5f,1f);
     public int menuX = -512;
@@ -34,7 +33,8 @@ public class PlayerManager : VanillaManager
 
         AddGridLayoutGroup(EquipmentPanel);
         AddGridLayoutGroup(InventoryPanel);
-        
+        InventoryPanel.AddComponent<InventoryFlex>();
+        EquipmentPanel.AddComponent<EquipmentFlex>();
 
         //
         ColorPanel(CharacterPanel, purple);
@@ -49,7 +49,6 @@ public class PlayerManager : VanillaManager
         ColorPanel(InventoryPanel, Color.black);
         ScalePanel(InventoryPanel, 512, 512);
         MovePanel(InventoryPanel, 0, -256);
-        // SetPanelSprite(InventoryPanel, inventoryPanelImage);
 
         CreateShipCore(canvas);
 

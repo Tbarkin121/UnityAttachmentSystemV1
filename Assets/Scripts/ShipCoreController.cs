@@ -10,16 +10,16 @@ public class ShipCoreController : VanillaManager
     public Thruster boosterData;
     public Item weaponData;
     public List<AttachmentPoint> attachmentPoints;
-    public List<ItemSlotFlex> itemSlots;
     public List<EquipmentSlotFlex> equipmentSlots;
-    // public List<> equipmentSlots;
-    private List<Item> items;
+    
     public Rigidbody2D rb;
     private List<GameObject> children;
     private int invtest = 0;
     private int eqtest = 0;
     private int timertest = 0;
     private bool eventbool = false;
+    public InventoryFlex inventory;
+    public EquipmentFlex equipment;
     // public event Action<Item> OnItemRightClickedEvent;
     
     void Start()
@@ -38,47 +38,111 @@ public class ShipCoreController : VanillaManager
         EquipmentTest();
         timertest++;
         if(timertest>=100)
-            timertest = 0;
+            timertest = 1;
     }
 
     private void EquipFromInventory(Item item)
     {
         Debug.Log("Test Fun Equip!");
-
+        if (item is EquippableItem)
+        {
+            Equip((EquippableItem)item);
+        }
     }
     private void UnequipFromEquipPanel(Item item)
     {
         Debug.Log("Test Fun Unequip!");
-
+        if (item is EquippableItem)
+        {
+            Unequip((EquippableItem)item);
+        }
     }
+    public void Equip(EquippableItem item)
+    {
+
+        if (inventory.RemoveItem(item))
+        {
+            EquippableItem previousItem;
+            if (equipment.AddItem(item, out previousItem))
+            {
+                if (previousItem != null)
+                {
+                    inventory.AddItem(previousItem);
+                }
+            }
+            else
+            {
+                inventory.AddItem(item);
+            }
+        }
+    }
+
+    public void Unequip(EquippableItem item)
+    {
+        if (!inventory.IsFull() && equipment.RemoveItem(item))
+        {
+            inventory.AddItem(item);
+        }
+    }
+    
+    
+    
+    // public bool AddItemEquipment (EquippableItem item, out EquippableItem previousItem)
+    // {
+    //     for (int i = 0; i < equipmentSlots.Count; i++)
+    //     {
+    //         if(equipmentSlots[i].equipmentType == item.equipmentType && equipmentSlots[i].item == null)
+    //         {
+    //             previousItem = (EquippableItem)equipmentSlots[i].item;
+    //             equipmentSlots[i].item = item;
+    //             return true;
+    //         }
+    //     }
+    //     previousItem = null;
+    //     return false;
+    // }
+    // public bool RemoveItemEquipment(EquippableItem item)
+    // {
+    //     for (int i = 0; i < equipmentSlots.Count; i++)
+    //     {
+    //         if(equipmentSlots[i].item == item)
+    //         {
+    //             equipmentSlots[i].item = null;
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+
+    
 
     private void InventoryTest()
     {
-        if(timertest == 0)
-        {
-            for(int i = 0; i<=9; i++)
-            {
-                itemSlots[i].item = null;
-            }
-            itemSlots[invtest].item = items[0];
-            invtest++;
-            if(invtest>=10)
-                invtest = 0;
-        }
+        // if(timertest == 0)
+        // {
+        //     for(int i = 0; i<itemSlots.Count; i++)
+        //     {
+        //         itemSlots[i].item = null;
+        //     }
+        //     itemSlots[invtest].item = items[0];
+        //     invtest++;
+        //     if(invtest>=itemSlots.Count)
+        //         invtest = 0;
+        // }
     }
     private void EquipmentTest()
     {
-        if(timertest == 0)
-        {
-            for(int i = 0; i<=2; i++)
-            {
-                equipmentSlots[i].item = null;
-            }
-            equipmentSlots[eqtest].item = items[0];
-            eqtest++;
-            if(eqtest>=3)
-                eqtest = 0;
-        }
+        // if(timertest == 0)
+        // {
+        //     for(int i = 0; i<equipmentSlots.Count; i++)
+        //     {
+        //         equipmentSlots[i].item = null;
+        //     }
+        //     equipmentSlots[eqtest].item = inventory.items[0];
+        //     eqtest++;
+        //     if(eqtest>=equipmentSlots.Count)
+        //         eqtest = 0;
+        // }
     }
     public void StartUI(Canvas _canvas)
     {
@@ -87,45 +151,21 @@ public class ShipCoreController : VanillaManager
         SpriteRenderer sr = gameObject.AddComponent<SpriteRenderer>();
         sr.sprite = bodyData.artwork;
         attachmentPoints = bodyData.attachmentPoints;
-        items = bodyData.items;
-        itemSlots = new List<ItemSlotFlex>();
         equipmentSlots = new List<EquipmentSlotFlex>();
-
+        Transform _characterPanel = _canvas.transform.Find("Character Panel");
+        Transform _inventoryParent = _characterPanel.Find("Inventory Panel");
+        Transform _equipmentParent = _characterPanel.Find("Equipment Panel");
         if(_canvas != null)
         {
-            int i = 0;
-            foreach(AttachmentPoint x in attachmentPoints)            
-            {
-                Transform _characterPanel = _canvas.transform.Find("Character Panel");
-                Transform _parent = _characterPanel.Find("Equipment Panel");
-                GameObject AttachmentTest = CreatePanel("Attachment Point " + i, _parent);
-                EquipmentSlotFlex equipmentSlot = AttachmentTest.AddComponent<EquipmentSlotFlex>();
-                equipmentSlots.Add(equipmentSlot);
-                equipmentSlot.OnRightClickEvent += UnequipFromEquipPanel;
-                ScalePanel(AttachmentTest, 128, 128);
-                MovePanel(AttachmentTest, 0, 0);
-                Sprite sp = Resources.Load<Sprite>("UI/EquipmentButton");
-                SetPanelSprite(AttachmentTest, sp);
-                i++;
-                
-            }
 
-            i = 0;
-            foreach(Item x in items)
-            {
-                Transform _characterPanel = _canvas.transform.Find("Character Panel");
-                Transform _parent = _characterPanel.Find("Inventory Panel");
-                GameObject AttachmentTest = CreatePanel("Inventory Slot " + i, _parent);
-                ItemSlotFlex itemSlot = AttachmentTest.AddComponent<ItemSlotFlex>();
-                itemSlots.Add(itemSlot);
-                itemSlot.OnRightClickEvent += EquipFromInventory;
-                ScalePanel(AttachmentTest, 128, 128);
-                MovePanel(AttachmentTest, 0, 0);
-                Sprite sp = Resources.Load<Sprite>("UI/InventoryButton");
-                SetPanelSprite(AttachmentTest, sp);
-                i++;
-                
-            }
+            equipment = _equipmentParent.GetComponent<EquipmentFlex>();
+            equipment.OnItemRightClickedEvent += UnequipFromEquipPanel;
+            equipment.ManualStart(bodyData.attachmentPoints);
+
+            inventory = _inventoryParent.GetComponent<InventoryFlex>();
+            inventory.OnItemRightClickedEvent += EquipFromInventory;
+            inventory.ManualStart(bodyData);
+
         }
         print("Ship Core Online!");
     }

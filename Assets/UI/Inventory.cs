@@ -12,7 +12,7 @@ public class Inventory : MonoBehaviour
     public event Action<Item> OnItemRightClickedEvent;
     private void Awake()
     {
-        Debug.Log(itemSlots.Length);
+        // Debug.Log(itemSlots.Length);
         for (int i = 0; i < itemSlots.Length; i++)
         {
             itemSlots[i].OnRightClickEvent += OnItemRightClickedEvent; //This chains together the right click on the item slot with the inventory manager equip call... beautiful

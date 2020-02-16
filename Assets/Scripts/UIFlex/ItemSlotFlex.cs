@@ -29,7 +29,7 @@ public class ItemSlotFlex : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    void Start ()
+    void Awake ()
     {   
         itemDisplay = new GameObject("Item Holder");
         itemDisplay.transform.SetParent(transform);

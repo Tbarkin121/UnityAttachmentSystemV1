@@ -161,11 +161,15 @@ public class ShipCoreController : VanillaManager
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        Debug.Log(rb);
+        int i = 0;
         foreach(AttachmentPoint x in attachmentPoints)
         {
-            physicalAttachmentPoints.Add(CreateAttachmentPoints(x));
+            physicalAttachmentPoints.Add(CreateAttachmentPoints(x, i));
+            i++;
         }
-        
+
+        print("Ship Core Online!");
     }
 
     
@@ -211,10 +215,12 @@ public class ShipCoreController : VanillaManager
         draggableItem.enabled = false;
         draggableItem.raycastTarget = false;
 
-        print("Ship Core Online!");
+        
+
+        
     }
 
-    GameObject CreateAttachmentPoints (AttachmentPoint _attachmentPoint)
+    GameObject CreateAttachmentPoints (AttachmentPoint _attachmentPoint, int idx)
     {
         GameObject attachmentPoint = new GameObject(_attachmentPoint.name);
         attachmentPoint.transform.SetParent(transform);
@@ -224,6 +230,7 @@ public class ShipCoreController : VanillaManager
         attachmentManager.equipmentType = _attachmentPoint.equipmentType;
         attachmentManager.parent = gameObject;
         attachmentManager.ship_rb = rb;
+        equipment.equipmentSlots[idx].ChangeEquipmentEvent += attachmentManager.ChangeEquipment;
         BoxCollider2D bc = attachmentPoint.AddComponent<BoxCollider2D>();
         bc.size = new Vector2(0.05f, 0.1f); //This type of thing should be stored on the body object
         return attachmentPoint;

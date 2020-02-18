@@ -18,6 +18,28 @@ public class AttachmentManager : MonoBehaviour
         UpdateEquipment(item);
         
     }
+    public void ChangeEquipment (Item _item)
+    {
+        SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();
+        EquippableItem equippableItem = _item as EquippableItem;
+        Debug.Log(_item);
+        Debug.Log(equippableItem);
+        if(equippableItem)
+        {
+            Debug.Log(item);
+            item = equippableItem;
+            Debug.Log(item);
+            sr.sprite = item.artwork;
+            sr.enabled = true;
+            sr.sortingOrder = 1;
+            currentHitpoints = item.hitpoints;
+        }
+        else
+        {
+            item = null;
+            sr.enabled = false;
+        }
+    }
     public void UpdateEquipment (EquippableItem _item)
     {
         SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();

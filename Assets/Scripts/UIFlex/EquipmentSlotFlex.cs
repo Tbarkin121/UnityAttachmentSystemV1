@@ -1,5 +1,31 @@
-﻿public class EquipmentSlotFlex : ItemSlotFlex
+﻿using UnityEngine;
+using System;
+public class EquipmentSlotFlex : ItemSlotFlex
 {
+    public event Action<Item> ChangeEquipmentEvent;  
+    private Item _equipment;
+    public override Item item
+    {
+        get { return _equipment; }
+        set 
+        {
+            Debug.Log("EquipmentSlotSet");
+            _equipment = value;
+            if(_equipment == null) 
+            {
+                image.color = disabledColor;
+                if(ChangeEquipmentEvent != null)
+                    ChangeEquipmentEvent(null);
+            }
+            else
+            {
+                image.sprite = _equipment.artwork;
+                image.color = normalColor;
+                if(ChangeEquipmentEvent != null)
+                    ChangeEquipmentEvent(_equipment);
+            }
+        }
+    }
     public EquipmentType equipmentType;
 
     protected override void OnValidate()

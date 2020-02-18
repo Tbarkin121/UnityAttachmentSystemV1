@@ -7,18 +7,20 @@ using System;
 [System.Serializable]
 public class ItemSlotFlex : MonoBehaviour, IPointerClickHandler, IDragHandler, IDropHandler, IBeginDragHandler, IEndDragHandler
 {
-    private Image image;
+    protected  Image image;
     public event Action<ItemSlotFlex> OnRightClickEvent;
     public event Action<ItemSlotFlex> OnBeginDragEvent;
     public event Action<ItemSlotFlex> OnEndDragEvent;
     public event Action<ItemSlotFlex> OnDragEvent;
     public event Action<ItemSlotFlex> OnDropEvent;
-    private Color normalColor = Color.white;
-    private Color disabledColor = new Color(1,1,1,0);
-    private Item _item;
+    public event Action<ItemSlotFlex> Test;
+    protected  Color normalColor = Color.white;
+    protected  Color disabledColor = new Color(1,1,1,0);
+    
     private GameObject itemDisplay;
     public int slotNum;
-    public Item item
+    private Item _item;
+    public virtual Item item
     {
         get { return _item; }
         set 

@@ -78,7 +78,7 @@ public class InventoryFlex : VanillaManager
     {
         for (int i = 0; i < itemSlots.Count; i++)
         {
-            Debug.Log(i + " : " + itemSlots[i].item + " : " + item + " : " + itemSlots.Count + " : " + (itemSlots[i].item == item) );
+            // Debug.Log(i + " : " + itemSlots[i].item + " : " + item + " : " + itemSlots.Count + " : " + (itemSlots[i].item == item) );
             if(itemSlots[i].item == null)
             {
                 itemSlots[i].item = item;

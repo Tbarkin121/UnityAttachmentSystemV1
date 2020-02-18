@@ -18,45 +18,7 @@ public class ShipCoreController : VanillaManager
     private Image draggableItem; //Need to create this still.. should just be a panel like the rest of them
     private ItemSlotFlex draggedSlot;
 
-    // private void Awake ()
-    // {
-        
-        
-    // }   
-
-    // public void Equip(EquippableItem item, out int _slotNum)
-    // {
-
-    //     if (inventory.RemoveItem(item))
-    //     {
-    //         EquippableItem previousItem;
-    //         if (equipment.AddItem(item, out previousItem, out _slotNum))
-    //         {
-    //             if (previousItem != null)
-    //             {
-    //                 inventory.AddItem(previousItem);
-    //             }
-    //         }
-    //         else
-    //         {
-    //             inventory.AddItem(item);
-    //         }
-    //     }
-    //     else
-    //     {
-    //         _slotNum = -1;
-    //     }
-        
-    // }
-
-    // public void Unequip(EquippableItem item, int _slotNum)
-    // {
-    //     Debug.Log("Slot Num : " + _slotNum);
-    //     if (!inventory.IsFull() && equipment.RemoveItem(item, _slotNum))
-    //     {
-    //         inventory.AddItem(item);
-    //     }
-    // }
+    
     private void Equip(ItemSlotFlex itemSlot)
     {
         EquippableItem equippableItem = itemSlot.item as EquippableItem;
@@ -132,8 +94,6 @@ public class ShipCoreController : VanillaManager
     }
     private void Drop(ItemSlotFlex dropitemSlot)
     {
-        // Debug.Log("DropItem " + dropitemSlot.CanReceiveItem(draggedSlot.item));
-        // Debug.Log("DragItem " + draggedSlot.CanReceiveItem(dropitemSlot.item));
         if (dropitemSlot.CanReceiveItem(draggedSlot.item) && draggedSlot.CanReceiveItem(dropitemSlot.item))
         {
             EquippableItem dragItem = draggedSlot.item as EquippableItem;
@@ -155,8 +115,6 @@ public class ShipCoreController : VanillaManager
             draggedSlot.item = dropitemSlot.item;
             dropitemSlot.item = draggedItem;
         }
-        
-        // syncShipComponents();
     }
     void Start()
     {
@@ -255,17 +213,4 @@ public class ShipCoreController : VanillaManager
     {
         physicalAttachmentPoints.Remove(_gameObject);
     }
-    // public void syncShipComponents()
-    // {
-    //     int i = 0;
-    //     foreach(Item x in equipment)
-    //     {
-    //         if(x != null)
-    //         {
-    //             physicalAttachmentPoints[i].GetComponent<AttachmentManager>().item = (EquippableItem)x.item;
-    //         }
-            
-    //         i++;
-    //     }
-    // }
 }

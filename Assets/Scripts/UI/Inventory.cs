@@ -53,27 +53,7 @@ public class InventoryFlex : VanillaManager
         }
     
     }
-    // public bool AddItem (Item item)
-    // {
-    //     if (IsFull())
-    //         return false;
-    //     items.Add(item);
-    //     RefreshUI();
-    //     return true; 
-    // }
-    // public bool RemoveItem(Item item)
-    // {
-    //     if(items.Remove(item))
-    //     {
-    //         RefreshUI();
-    //         return true;
-    //     }
-    //     return false;
-    // }
-    // public bool IsFull()
-    // {
-    //     return items.Count >= itemSlots.Count;
-    // }
+
     public bool AddItem (Item item)
     {
         for (int i = 0; i < itemSlots.Count; i++)

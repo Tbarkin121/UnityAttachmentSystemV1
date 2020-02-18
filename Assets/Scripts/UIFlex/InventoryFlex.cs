@@ -78,7 +78,8 @@ public class InventoryFlex : VanillaManager
     {
         for (int i = 0; i < itemSlots.Count; i++)
         {
-            if(itemSlots[i].item = null)
+            Debug.Log(i + " : " + itemSlots[i].item + " : " + item + " : " + itemSlots.Count + " : " + (itemSlots[i].item == item) );
+            if(itemSlots[i].item == null)
             {
                 itemSlots[i].item = item;
                 return true;
@@ -91,11 +92,21 @@ public class InventoryFlex : VanillaManager
     {
         for (int i = 0; i < itemSlots.Count; i++)
         {
-            if(itemSlots[i].item = item)
+            // Debug.Log(i + " : " + itemSlots[i].item + " : " + item + " : " + itemSlots.Count + " : " + (itemSlots[i].item == item) );
+            if(itemSlots[i].item == item)
             {
                 itemSlots[i].item = null;
                 return true;
             }
+        }
+        return false;
+    }
+    public bool RemoveItem(ItemSlotFlex itemSlot)
+    {
+        if (itemSlot.item != null)
+        {
+            itemSlot.item = null;
+            return true;
         }
         return false;
     }
@@ -104,7 +115,7 @@ public class InventoryFlex : VanillaManager
     {
         for (int i = 0; i < itemSlots.Count; i++)
         {
-            if(itemSlots[i].item = null)
+            if(itemSlots[i].item == null)
             {
                 return false;
             }

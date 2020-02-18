@@ -62,14 +62,13 @@ public class ShipCoreController : VanillaManager
         EquippableItem equippableItem = itemSlot.item as EquippableItem;
         if (equippableItem != null)
         {
-            // int _slotNum;
-            Equip(equippableItem);
+            Equip(equippableItem, itemSlot);
         }
     }
-    public void Equip(EquippableItem item)
+    public void Equip(EquippableItem item, ItemSlotFlex itemSlot)
     {
 
-        if (inventory.RemoveItem(item))
+        if (inventory.RemoveItem(itemSlot))
         {
             EquippableItem previousItem;
             if (equipment.AddItem(item, out previousItem))
@@ -90,12 +89,13 @@ public class ShipCoreController : VanillaManager
         EquippableItem equippableItem = itemSlot.item as EquippableItem;
         if (equippableItem != null)
         {
-            Unequip(equippableItem);
+            Unequip(equippableItem, itemSlot);
         }
     }
-    public void Unequip(EquippableItem item)
+    public void Unequip(EquippableItem item, ItemSlotFlex itemSlot)
     {
-        if (!inventory.IsFull() && equipment.RemoveItem(item))
+        
+        if (!inventory.IsFull() && equipment.RemoveItem(itemSlot))
         {
             inventory.AddItem(item);
         }
@@ -132,30 +132,31 @@ public class ShipCoreController : VanillaManager
     }
     private void Drop(ItemSlotFlex dropitemSlot)
     {
-        Debug.Log("DropItem " + dropitemSlot.CanReceiveItem(draggedSlot.item));
-        Debug.Log("DragItem " + draggedSlot.CanReceiveItem(dropitemSlot.item));
+        // Debug.Log("DropItem " + dropitemSlot.CanReceiveItem(draggedSlot.item));
+        // Debug.Log("DragItem " + draggedSlot.CanReceiveItem(dropitemSlot.item));
         if (dropitemSlot.CanReceiveItem(draggedSlot.item) && draggedSlot.CanReceiveItem(dropitemSlot.item))
         {
             EquippableItem dragItem = draggedSlot.item as EquippableItem;
             EquippableItem dropItem = dropitemSlot.item as EquippableItem;
             
-            if (draggedSlot is EquipmentSlotFlex)
-            {
-                if (dragItem != null) Unequip(dragItem);
-                if (dropItem != null) Equip(dropItem);
-            }
-            if (dropitemSlot is EquipmentSlotFlex)
-            {
-                if (dragItem != null) Equip(dragItem);
-                if (dropItem != null) Unequip(dropItem);
-            }
+            // The below if statements were for stat related functions I've yet to impliment
+            // if (draggedSlot is EquipmentSlotFlex)
+            // {
+                // if (dragItem != null) dragItem.Unequip(this);
+                // if (dropItem != null) dropItem.Equip(this);
+            // }
+            // if (dropitemSlot is EquipmentSlotFlex)
+            // {
+                // if (dragItem != null) dragItem.Equip(this);
+                // if (dropItem != null) dropItem.Unequip(this);
+            // }
 
             Item draggedItem = draggedSlot.item;
             draggedSlot.item = dropitemSlot.item;
             dropitemSlot.item = draggedItem;
         }
         
-
+        // syncShipComponents();
     }
     void Start()
     {
@@ -247,4 +248,17 @@ public class ShipCoreController : VanillaManager
     {
         physicalAttachmentPoints.Remove(_gameObject);
     }
+    // public void syncShipComponents()
+    // {
+    //     int i = 0;
+    //     foreach(Item x in equipment)
+    //     {
+    //         if(x != null)
+    //         {
+    //             physicalAttachmentPoints[i].GetComponent<AttachmentManager>().item = (EquippableItem)x.item;
+    //         }
+            
+    //         i++;
+    //     }
+    // }
 }

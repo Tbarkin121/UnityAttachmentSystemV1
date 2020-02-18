@@ -86,4 +86,13 @@ public class EquipmentFlex : InventoryFlex
         }
         return false;
     }
+    public bool RemoveItem(EquipmentSlotFlex _slot)
+    {
+        if (_slot.item != null)
+        {
+            _slot.item = null;
+            return true;
+        }
+        return false;
+    }
 }

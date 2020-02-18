@@ -27,13 +27,11 @@ public class ItemSlotFlex : MonoBehaviour, IPointerClickHandler, IDragHandler, I
             if(_item == null) 
             {
                 image.color = disabledColor;
-                image.enabled = true;
             }
             else
             {
                 image.sprite = _item.artwork;
                 image.color = normalColor;
-                image.enabled = true;
             }
         }
     }

@@ -209,6 +209,17 @@ public class ShipCoreController : VanillaManager
     {
         physicalAttachmentPoints[component].GetComponent<AttachmentManager>().TakeDamage(25);
     }
+    public void TestWeapon()
+    {
+        foreach(GameObject x in physicalAttachmentPoints)
+        {
+            EquippableItem ei = x.GetComponent<AttachmentManager>().item as EquippableItem;
+            if (ei != null && ei.equipmentType == EquipmentType.Weapon)
+            {
+                x.GetComponent<AttachmentManager>().Fire();
+            }
+        }
+    }
 
     public void DeathReport(GameObject _gameObject)
     {

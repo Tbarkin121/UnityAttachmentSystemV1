@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AttachmentManager : MonoBehaviour
 {
+    private bool whichBay = false;
     public EquippableItem item;
     public EquipmentType equipmentType;
     public Rigidbody2D ship_rb;
@@ -90,6 +91,28 @@ public class AttachmentManager : MonoBehaviour
         currentHitpoints -= _damage;
         if(currentHitpoints <= 0)
             Die();
+    }
+    public void Fire ()
+    {
+        if(whichBay)
+        {
+            whichBay = false;
+            GameObject _missile = Instantiate(item.weaponEffect, transform.position, transform.rotation);
+            Rigidbody2D _rb = _missile.GetComponent<Rigidbody2D>();
+            Rigidbody2D _rbp = parent.GetComponent<Rigidbody2D>();
+            _rb.velocity = _rbp.velocity;
+            _rb.angularVelocity = _rbp.angularVelocity;
+            _rb.AddForce(transform.right*20f);
+            
+        }else{
+            whichBay = true;
+            GameObject _missile = Instantiate(item.weaponEffect, transform.position, transform.rotation);
+            Rigidbody2D _rb = _missile.GetComponent<Rigidbody2D>();
+            Rigidbody2D _rbp = parent.GetComponent<Rigidbody2D>();
+            _rb.velocity = _rbp.velocity;
+            _rb.angularVelocity = _rbp.angularVelocity;
+            _rb.AddForce(-1.0f*transform.right*20f);
+        }
     }
 
     private void Die()

@@ -22,3 +22,7 @@ MonoBehaviour:
   attachmentPoint: {x: 0, y: 0, z: 0}
   colliderSize: {x: 0.25, y: 0.25}
   equipmentType: 1
+  perferationPower: 0
+  perferationResistance: 0
+  weaponEffect: {fileID: 6468106010762480831, guid: d32354497cca66e4790e253da8dd89d1,
+    type: 3}

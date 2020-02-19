@@ -114,6 +114,10 @@ public class PlayerManager : VanillaManager
         {
             shipCore.GetComponent<ShipCoreController>().TestDamage(1);   
         }
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            shipCore.GetComponent<ShipCoreController>().TestWeapon();   
+        }
         if(Input.GetKeyDown(KeyCode.I))
         {
             CharacterPanel.SetActive(!CharacterPanel.activeSelf);  

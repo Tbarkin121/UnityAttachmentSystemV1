@@ -24,6 +24,7 @@ public class EquipmentFlex : InventoryFlex
         {
             GameObject AttachmentTest = CreatePanel("Attachment Point " + i, transform);
             EquipmentSlotFlex equipmentSlot = AttachmentTest.AddComponent<EquipmentSlotFlex>();
+            equipmentSlot.equipmentType = x.equipmentType;
             equipmentSlot.slotNum = i;
             equipmentSlot.OnRightClickEvent += OnRightClickEvent;
             equipmentSlot.OnBeginDragEvent += OnBeginDragEvent;

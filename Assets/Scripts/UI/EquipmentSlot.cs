@@ -4,6 +4,7 @@ public class EquipmentSlotFlex : ItemSlotFlex
 {
     public event Action<EquipmentSlotFlex> ChangeEquipmentEvent;  
     private Item _equipment;
+    public EquipmentType equipmentType;
     public override Item item
     {
         get { return _equipment; }
@@ -26,7 +27,7 @@ public class EquipmentSlotFlex : ItemSlotFlex
             }
         }
     }
-    public EquipmentType equipmentType;
+    
 
     protected override void OnValidate()
     {
@@ -40,6 +41,7 @@ public class EquipmentSlotFlex : ItemSlotFlex
             return true;
 
         EquippableItem equippableItem = item as EquippableItem;
+        Debug.Log("Item Type : " + equippableItem.equipmentType + ". Slot Type : " + equipmentType);
         return equippableItem != null && equippableItem.equipmentType == equipmentType;
     }
 }

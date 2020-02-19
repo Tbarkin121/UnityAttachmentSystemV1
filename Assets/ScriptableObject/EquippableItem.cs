@@ -12,6 +12,7 @@ public class EquippableItem : Item
     public EquipmentType equipmentType;
     public float perferationPower;
     public float perferationResistance;
+    public GameObject weaponEffect;
 
 }
 

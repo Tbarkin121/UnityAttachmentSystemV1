@@ -7,11 +7,15 @@ public class PlayerManager : VanillaManager
     public Body bodyData;
     private GameObject shipCore;
     GameObject shipControlCore;
-    private GameObject mCanvas;
+    public GameObject mCanvas;
     Color pink = new Color(1f,0f,1f,1f);
     Color purple = new Color(0.25f,0f,0.5f,1f);
     public int menuX = -512;
     public EquippableItem item;
+    private GameObject CharacterPanel;
+    private GameObject EquipmentPanel;
+    private GameObject StatsPanel;
+    private GameObject InventoryPanel;
 
     void Start ()
     {
@@ -25,10 +29,10 @@ public class PlayerManager : VanillaManager
         mCanvas.AddComponent<CanvasScaler>();        
         mCanvas.AddComponent<GraphicRaycaster>();
 
-        GameObject CharacterPanel = CreatePanel("Character Panel", mCanvas.transform);
-        GameObject EquipmentPanel = CreatePanel("Equipment Panel", CharacterPanel.transform);
-        GameObject StatsPanel = CreatePanel("Stats Panel", CharacterPanel.transform);
-        GameObject InventoryPanel = CreatePanel("Inventory Panel", CharacterPanel.transform);
+        CharacterPanel = CreatePanel("Character Panel", mCanvas.transform);
+        EquipmentPanel = CreatePanel("Equipment Panel", CharacterPanel.transform);
+        StatsPanel = CreatePanel("Stats Panel", CharacterPanel.transform);
+        InventoryPanel = CreatePanel("Inventory Panel", CharacterPanel.transform);
 
         AddGridLayoutGroup(EquipmentPanel);
         AddGridLayoutGroup(InventoryPanel);
@@ -104,8 +108,35 @@ public class PlayerManager : VanillaManager
         }
         if(Input.GetKeyDown(KeyCode.C))
         {
-            shipCore.GetComponent<ShipCoreController>().TestDamage(25);   
+            shipCore.GetComponent<ShipCoreController>().TestDamage(0);
+        }
+        if(Input.GetKeyDown(KeyCode.V))
+        {
+            shipCore.GetComponent<ShipCoreController>().TestDamage(1);   
+        }
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            CharacterPanel.SetActive(!CharacterPanel.activeSelf);  
+            if ( CharacterPanel.activeSelf )
+            {
+                ShowMouseCursor();
+            }
+            else
+            {
+                HideMouseCursor();
+            }
         }
         
+    }
+
+    public void ShowMouseCursor()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+    public void HideMouseCursor()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

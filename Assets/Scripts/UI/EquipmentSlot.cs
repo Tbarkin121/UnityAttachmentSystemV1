@@ -2,7 +2,7 @@
 using System;
 public class EquipmentSlotFlex : ItemSlotFlex
 {
-    public event Action<Item> ChangeEquipmentEvent;  
+    public event Action<EquipmentSlotFlex> ChangeEquipmentEvent;  
     private Item _equipment;
     public override Item item
     {
@@ -15,14 +15,14 @@ public class EquipmentSlotFlex : ItemSlotFlex
             {
                 image.color = disabledColor;
                 if(ChangeEquipmentEvent != null)
-                    ChangeEquipmentEvent(null);
+                    ChangeEquipmentEvent(this);
             }
             else
             {
                 image.sprite = _equipment.artwork;
                 image.color = normalColor;
                 if(ChangeEquipmentEvent != null)
-                    ChangeEquipmentEvent(_equipment);
+                    ChangeEquipmentEvent(this);
             }
         }
     }

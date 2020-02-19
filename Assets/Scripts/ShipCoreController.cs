@@ -188,6 +188,7 @@ public class ShipCoreController : VanillaManager
         attachmentManager.equipmentType = _attachmentPoint.equipmentType;
         attachmentManager.parent = gameObject;
         attachmentManager.ship_rb = rb;
+        attachmentManager.ParentSlot = equipment.equipmentSlots[idx];
         equipment.equipmentSlots[idx].ChangeEquipmentEvent += attachmentManager.ChangeEquipment;
         BoxCollider2D bc = attachmentPoint.AddComponent<BoxCollider2D>();
         bc.size = new Vector2(0.05f, 0.1f); //This type of thing should be stored on the body object
@@ -204,13 +205,13 @@ public class ShipCoreController : VanillaManager
         }
     }
 
-    public void TestDamage(float damage)
+    public void TestDamage(int component)
     {
-        physicalAttachmentPoints[0].GetComponent<AttachmentManager>().TakeDamage(damage);
+        physicalAttachmentPoints[component].GetComponent<AttachmentManager>().TakeDamage(25);
     }
 
     public void DeathReport(GameObject _gameObject)
     {
-        physicalAttachmentPoints.Remove(_gameObject);
+        
     }
 }

@@ -10,6 +10,12 @@ public class AttachmentManager : MonoBehaviour
     public float maxHitpoints;
     public float currentHitpoints;
     public GameObject parent;
+    private EquipmentSlotFlex parentSlot;
+    public EquipmentSlotFlex ParentSlot
+    {
+        get{return parentSlot;}
+        set{parentSlot = value;}
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -18,13 +24,11 @@ public class AttachmentManager : MonoBehaviour
         UpdateEquipment(item);
         
     }
-    public void ChangeEquipment (Item _item)
+    public void ChangeEquipment (EquipmentSlotFlex _equipmentSlot)
     {
         SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();
-        EquippableItem equippableItem = _item as EquippableItem;
-        Debug.Log(_item);
-        Debug.Log(equippableItem);
-        if(equippableItem)
+        EquippableItem equippableItem = _equipmentSlot.item as EquippableItem;
+        if(equippableItem != null)
         {
             Debug.Log(item);
             item = equippableItem;
@@ -91,7 +95,8 @@ public class AttachmentManager : MonoBehaviour
     private void Die()
     {
         parent.GetComponent<ShipCoreController>().DeathReport(gameObject);
-        Destroy(gameObject);
+        parentSlot.item = null;
+        // Destroy(gameObject);
     }
 
 }

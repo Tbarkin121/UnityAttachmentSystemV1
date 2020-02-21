@@ -4,9 +4,11 @@
 public class Item : ScriptableObject{
     new public string name = "New Item";
     public Sprite artwork = null;
+    public Vector2 colliderSize;
+    //Stats : 
     public int mass;
-    public int hitpoints;
-    public int armor;
+    private int width;
+    private int height;
 
     public virtual void Use ()
     {
@@ -16,8 +18,10 @@ public class Item : ScriptableObject{
         Debug.Log ("Using  " + name);
     }
     
-    protected virtual void Die ()
+    public virtual void Die ()
     {
-
+        // Kill the item
+        // Something might happen
+        Debug.Log ("Dieing  " + name);
     }
 }

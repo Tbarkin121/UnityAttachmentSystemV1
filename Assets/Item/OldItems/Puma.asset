@@ -15,10 +15,20 @@ MonoBehaviour:
   name: New Item
   artwork: {fileID: -5174345661739938750, guid: 524a1ed065583964c9182e347fa94a07,
     type: 3}
+  colliderSize: {x: 0.25, y: 0.25}
   mass: 1
-  hitpoints: 100
+  inventoryWidth: 0
+  inventoryHeight: 0
+  attachmentPointLocation: {x: 0, y: 0, z: 0}
+  equipmentType: 0
+  mainEffect: {fileID: 0}
+  damageEffect: {fileID: 0}
+  destroyedEffect: {fileID: 0}
+  drag: 1
+  angularDrag: 1
   armor: 0
-  ArmorLevel: 1
+  hpMax: 0
+  perferationResistance: 0
   numInventorySlots: 10
   attachmentPoints:
   - name: Booster 1
@@ -40,6 +50,3 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 11023d500467f964da5ed2c57d4a5e3f, type: 2}
   - {fileID: 11400000, guid: 11023d500467f964da5ed2c57d4a5e3f, type: 2}
   - {fileID: 11400000, guid: 11023d500467f964da5ed2c57d4a5e3f, type: 2}
-  drag: 1
-  angularDrag: 1
-  colliderSize: {x: 0.25, y: 0.25}

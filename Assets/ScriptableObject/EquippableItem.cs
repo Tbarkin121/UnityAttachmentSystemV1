@@ -5,19 +5,32 @@ using UnityEngine;
 [CreateAssetMenu]
 public class EquippableItem : Item
 {
-    public float maxForce;
-    public Vector3 forceOffset;
-    public Vector3 attachmentPoint;
-    public Vector2 colliderSize;
+
+    public Vector3 attachmentPointLocation;
+    
     public EquipmentType equipmentType;
-    public float perferationPower;
-    public float perferationResistance;
-    public GameObject weaponEffect;
+    public GameObject mainEffect;
+    public GameObject damageEffect;
+    public GameObject destroyedEffect;
+    // Next 2 are for the Rigid Body dynamics of a system
+    public float drag;
+    public float angularDrag;
+    // Stats :
+    public int armor; //Damage Mitigation
+    public int hpMax; //max hit points
+    public int perferationResistance; // resistance to internal damage
+    private int hp; //current hit points
+    
+    
 
 }
 
 public enum EquipmentType
 {
+    Body,
     Thruster,
-    Weapon
+    Weapon,
+    Sheild,
+    Utility,
+    Drone
 }

@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: TestWeapon
   artwork: {fileID: 21300000, guid: d75635e5ed998da42a6bbafe0390fa32, type: 3}
-  mass: 1
-  hitpoints: 1
-  armor: 1
-  maxForce: 1
-  forceOffset: {x: 0, y: 0, z: 0}
-  attachmentPoint: {x: 0, y: 0, z: 0}
   colliderSize: {x: 0.25, y: 0.25}
+  mass: 1
+  attachmentPointLocation: {x: 0, y: 0, z: 0}
   equipmentType: 1
-  perferationPower: 0
+  mainEffect: {fileID: 0}
+  damageEffect: {fileID: 0}
+  destroyedEffect: {fileID: 0}
+  drag: 0
+  angularDrag: 0
+  armor: 1
+  hpMax: 0
   perferationResistance: 0
-  weaponEffect: {fileID: 6468106010762480831, guid: d32354497cca66e4790e253da8dd89d1,
-    type: 3}

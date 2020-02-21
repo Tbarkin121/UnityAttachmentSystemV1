@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Thruster", menuName = "Thruster/Small")]
-public class Thruster : Item
+public class Thruster : EquippableItem
 {
-    public int force;
-    public Vector3 attachment_point;
-    public Vector3 thrustOffset;
+    public ThrusterType thrusterType;
+    public float maxForce;
+    public Vector3 forceOffset;
+
+}
+public enum ThrusterType
+{
+    Hall,
+    Rocket
 }

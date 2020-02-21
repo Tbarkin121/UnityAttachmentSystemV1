@@ -13,7 +13,6 @@ public class ItemSlotFlex : MonoBehaviour, IPointerClickHandler, IDragHandler, I
     public event Action<ItemSlotFlex> OnEndDragEvent;
     public event Action<ItemSlotFlex> OnDragEvent;
     public event Action<ItemSlotFlex> OnDropEvent;
-    public event Action<ItemSlotFlex> Test;
     protected  Color normalColor = Color.white;
     protected  Color disabledColor = new Color(1,1,1,0);
     

@@ -68,6 +68,8 @@ public class EquipmentFlex : InventoryFlex
     {
         for (int i = 0; i < equipmentSlots.Count; i++)
         {
+            Debug.Log("EQ Slot : " + equipmentSlots[i].equipmentType);
+            Debug.Log("item  : " + item.equipmentType);
             if(equipmentSlots[i].equipmentType == item.equipmentType && equipmentSlots[i].item == null)
             {
                 previousItem = (EquippableItem)equipmentSlots[i].item;

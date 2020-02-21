@@ -14,11 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: TestThruster
   artwork: {fileID: 2710112820315260905, guid: 59ba22856931c8349aa675ec02150ba1, type: 3}
-  mass: 1
-  hitpoints: 1
-  armor: 1
-  maxForce: 1
-  forceOffset: {x: 0, y: 0, z: 0}
-  attachmentPoint: {x: 0, y: 0, z: 0}
   colliderSize: {x: 0.25, y: 0.25}
+  mass: 1
+  attachmentPointLocation: {x: 0, y: 0, z: 0}
   equipmentType: 0
+  mainEffect: {fileID: 0}
+  damageEffect: {fileID: 0}
+  destroyedEffect: {fileID: 0}
+  drag: 0
+  angularDrag: 0
+  armor: 1
+  hpMax: 0
+  perferationResistance: 0

@@ -21,6 +21,7 @@ public class InventoryFlex : VanillaManager
 
     public void ManualStart (Body _bodyData)
     {
+        
         startingItems = _bodyData.items;
         for (int i = 0; i < _bodyData.numInventorySlots; i++)
         {

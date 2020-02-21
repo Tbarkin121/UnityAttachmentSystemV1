@@ -14,8 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: New Item
   artwork: {fileID: -482130097425260544, guid: 59ba22856931c8349aa675ec02150ba1, type: 3}
+  colliderSize: {x: 0, y: 0}
   mass: 1
-  hitpoints: 100
-  force: 1
-  attachment_point: {x: 0, y: 0, z: 0}
-  thrustOffset: {x: 0, y: 0, z: 0}
+  inventoryWidth: 0
+  inventoryHeight: 0
+  attachmentPointLocation: {x: 0, y: 0, z: 0}
+  equipmentType: 0
+  mainEffect: {fileID: 0}
+  damageEffect: {fileID: 0}
+  destroyedEffect: {fileID: 0}
+  drag: 0
+  angularDrag: 0
+  armor: 0
+  hpMax: 0
+  perferationResistance: 0
+  thrusterType: 0
+  maxForce: 0
+  forceOffset: {x: 0, y: 0, z: 0}

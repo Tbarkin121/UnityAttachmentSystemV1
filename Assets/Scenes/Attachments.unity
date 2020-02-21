@@ -214,26 +214,13 @@ GameObject:
   m_Component:
   - component: {fileID: 921028599}
   - component: {fileID: 921028598}
-  - component: {fileID: 921028597}
   m_Layer: 0
   m_Name: Player 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &921028597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 921028596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31bd83e114ae5ab488c0cd2c3c73b49f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_IsActive: 0
 --- !u!114 &921028598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,7 +236,6 @@ MonoBehaviour:
   bodyData: {fileID: 11400000, guid: a2d52cb84f080c7499e4ab15d7fd6c3e, type: 2}
   mCanvas: {fileID: 0}
   menuX: 512
-  item: {fileID: 0}
 --- !u!4 &921028599
 Transform:
   m_ObjectHideFlags: 0
@@ -530,10 +516,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba9e9a2c5063e14494e503d5f0d85c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodyData: {fileID: 11400000, guid: a2d52cb84f080c7499e4ab15d7fd6c3e, type: 2}
+  bodyData: {fileID: 11400000, guid: 17af030f257b16d4680014d55d9c2050, type: 2}
   mCanvas: {fileID: 0}
-  menuX: -512
-  item: {fileID: 11400000, guid: e058d9ccf284f6a429949fb6945a36de, type: 2}
+  menuX: -1024
 --- !u!4 &1899033577
 Transform:
   m_ObjectHideFlags: 0

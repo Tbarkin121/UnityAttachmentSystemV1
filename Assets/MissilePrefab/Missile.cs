@@ -11,7 +11,7 @@ public class Missile : MonoBehaviour
     private float second_stage_counter = 1f;
     private bool stage_one_done = false;
     private bool stage_two_start = false;
-    private bool missile_fule_empty = false;
+    private bool missile_fuel_empty = false;
     private bool armed = false;
     public ParticleSystem smokePrefab;
     // Start is called before the first frame update
@@ -58,7 +58,7 @@ public class Missile : MonoBehaviour
             rb.AddForce(transform.up*speed);
             yield return null;
         }
-        missile_fule_empty = true;
+        missile_fuel_empty = true;
         
     }
 
@@ -71,13 +71,12 @@ public class Missile : MonoBehaviour
             GameObject hitObject = hitInfo.GetComponent<GameObject>();
             if(hitObject != null)
             {
-                ShipCoreController scc = hitObject.GetComponent<ShipCoreController>();
-                if(scc != null)
+                if(hitObject.tag == "VehiclePart")
                 {
-                    Instantiate(smokePrefab, transform.position, transform.rotation);
+                    ParticleSystem _ps = Instantiate(smokePrefab, transform.position, transform.rotation);
                     Destroy(gameObject);
-                    scc.TestDamage(0);
-                    scc.TestDamage(1);
+                    // scc.TestDamage(0);
+                    // scc.TestDamage(1);
                 }
                 
                 

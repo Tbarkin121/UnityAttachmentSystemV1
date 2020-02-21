@@ -27,8 +27,10 @@ public class AttachmentManager : MonoBehaviour
     }
     public void ChangeEquipment (EquipmentSlotFlex _equipmentSlot)
     {
+        
         SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();
         EquippableItem equippableItem = _equipmentSlot.item as EquippableItem;
+        Debug.Log(_equipmentSlot.item);
         if(equippableItem != null)
         {
             Debug.Log(item);
@@ -37,7 +39,7 @@ public class AttachmentManager : MonoBehaviour
             sr.sprite = item.artwork;
             sr.enabled = true;
             sr.sortingOrder = 1;
-            currentHitpoints = item.hitpoints;
+            currentHitpoints = item.hpMax;
         }
         else
         {
@@ -54,7 +56,7 @@ public class AttachmentManager : MonoBehaviour
             sr.sprite = item.artwork;
             sr.enabled = true;
             sr.sortingOrder = 1;
-            currentHitpoints = item.hitpoints;
+            currentHitpoints = item.hpMax;
         }
         else
         {
@@ -66,22 +68,28 @@ public class AttachmentManager : MonoBehaviour
     // Update is called once per frame
     public void RequestForce(float _force)
     {
-        if(item != null && item.equipmentType == EquipmentType.Thruster)
+        Thruster _thruster = item as Thruster;
+        // Debug.Log("test 1   " + item);
+        // Debug.Log(item);
+        // Debug.Log("test 2   " + _thruster);
+        // Debug.Log(_thruster);
+        if(_thruster != null)
         {
-            float appliedForce = Mathf.Clamp(_force, -item.maxForce, item.maxForce); 
+            float appliedForce = Mathf.Clamp(_force, -_thruster.maxForce, _thruster.maxForce); 
             ship_rb.AddForce(transform.up*appliedForce);
-            ship_rb.AddTorque((transform.localPosition.x+item.forceOffset.x)*appliedForce);
+            ship_rb.AddTorque((transform.localPosition.x+_thruster.forceOffset.x)*appliedForce);
         }
         
     }
     public void RequestTurn(float _force)
     {
-        if(item != null && item.equipmentType == EquipmentType.Thruster)
+        Thruster _thruster = item as Thruster;
+        if(_thruster != null)
         {
             _force *= Mathf.Sign(transform.localPosition.x);
-            float appliedForce = Mathf.Clamp(_force, -item.maxForce, item.maxForce); 
+            float appliedForce = Mathf.Clamp(_force, -_thruster.maxForce, _thruster.maxForce); 
             ship_rb.AddForce(transform.up*appliedForce);
-            ship_rb.AddTorque((transform.localPosition.x+item.forceOffset.x)*appliedForce);
+            ship_rb.AddTorque((transform.localPosition.x+_thruster.forceOffset.x)*appliedForce);
         }
         
     }
@@ -94,25 +102,30 @@ public class AttachmentManager : MonoBehaviour
     }
     public void Fire ()
     {
-        if(whichBay)
+        Weapon _weapon = item as Weapon;
+        if(_weapon != null)
         {
-            whichBay = false;
-            GameObject _missile = Instantiate(item.weaponEffect, transform.position, transform.rotation);
-            Rigidbody2D _rb = _missile.GetComponent<Rigidbody2D>();
-            Rigidbody2D _rbp = parent.GetComponent<Rigidbody2D>();
-            _rb.velocity = _rbp.velocity;
-            _rb.angularVelocity = _rbp.angularVelocity;
-            _rb.AddForce(transform.right*20f);
-            
-        }else{
-            whichBay = true;
-            GameObject _missile = Instantiate(item.weaponEffect, transform.position, transform.rotation);
-            Rigidbody2D _rb = _missile.GetComponent<Rigidbody2D>();
-            Rigidbody2D _rbp = parent.GetComponent<Rigidbody2D>();
-            _rb.velocity = _rbp.velocity;
-            _rb.angularVelocity = _rbp.angularVelocity;
-            _rb.AddForce(-1.0f*transform.right*20f);
+            if(whichBay)
+            {
+                whichBay = false;
+                GameObject _missile = Instantiate(_weapon.mainEffect, transform.position, transform.rotation);
+                Rigidbody2D _rb = _missile.GetComponent<Rigidbody2D>();
+                Rigidbody2D _rbp = parent.GetComponent<Rigidbody2D>();
+                _rb.velocity = _rbp.velocity;
+                _rb.angularVelocity = _rbp.angularVelocity;
+                _rb.AddForce(transform.right*20f);
+                
+            }else{
+                whichBay = true;
+                GameObject _missile = Instantiate(_weapon.mainEffect, transform.position, transform.rotation);
+                Rigidbody2D _rb = _missile.GetComponent<Rigidbody2D>();
+                Rigidbody2D _rbp = parent.GetComponent<Rigidbody2D>();
+                _rb.velocity = _rbp.velocity;
+                _rb.angularVelocity = _rbp.angularVelocity;
+                _rb.AddForce(-1.0f*transform.right*20f);
+            }
         }
+        
     }
 
     private void Die()

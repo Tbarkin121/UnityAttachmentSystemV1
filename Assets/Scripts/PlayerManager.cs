@@ -11,7 +11,6 @@ public class PlayerManager : VanillaManager
     Color pink = new Color(1f,0f,1f,1f);
     Color purple = new Color(0.25f,0f,0.5f,1f);
     public int menuX = -512;
-    public EquippableItem item;
     private GameObject CharacterPanel;
     private GameObject EquipmentPanel;
     private GameObject StatsPanel;
@@ -65,6 +64,7 @@ public class PlayerManager : VanillaManager
             shipCore.transform.SetParent(transform);
             shipCore.transform.localPosition = Vector3.zero;
             shipCore.transform.rotation = Quaternion.identity;
+            shipCore.tag = "VehiclePart";
             ShipCoreController scController = shipCore.AddComponent<ShipCoreController>();
             scController.bodyData = bodyData;
             scController.StartUI(_canvas);

@@ -29,14 +29,15 @@ public class ShipCoreController : VanillaManager
     }
     public void Equip(EquippableItem item, ItemSlotFlex itemSlot)
     {
-
         if (inventory.RemoveItem(itemSlot))
         {
             EquippableItem previousItem;
             if (equipment.AddItem(item, out previousItem))
             {
+                Debug.Log("TP2");
                 if (previousItem != null)
                 {
+                    Debug.Log("TP3");
                     inventory.AddItem(previousItem);
                 }
             }
@@ -184,6 +185,7 @@ public class ShipCoreController : VanillaManager
         attachmentPoint.transform.SetParent(transform);
         attachmentPoint.transform.localPosition = _attachmentPoint.location;
         attachmentPoint.transform.rotation = Quaternion.identity;
+        attachmentPoint.tag = "VehiclePart";
         AttachmentManager attachmentManager = attachmentPoint.AddComponent<AttachmentManager>();
         attachmentManager.equipmentType = _attachmentPoint.equipmentType;
         attachmentManager.parent = gameObject;

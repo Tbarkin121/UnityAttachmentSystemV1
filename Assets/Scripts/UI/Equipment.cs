@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class EquipmentFlex : InventoryFlex
+public class Equipment : Inventory
 {
     public List<AttachmentPoint> attachmentPoints;
-    public List<EquipmentSlotFlex> equipmentSlots;
-    new public event Action<ItemSlotFlex> OnRightClickEvent;
-    new public event Action<ItemSlotFlex> OnBeginDragEvent;
-    new public event Action<ItemSlotFlex> OnEndDragEvent;
-    new public event Action<ItemSlotFlex> OnDragEvent;
-    new public event Action<ItemSlotFlex> OnDropEvent;
+    public List<EquipmentSlot> equipmentSlots;
+    new public event Action<ItemSlot> OnRightClickEvent;
+    new public event Action<ItemSlot> OnBeginDragEvent;
+    new public event Action<ItemSlot> OnEndDragEvent;
+    new public event Action<ItemSlot> OnDragEvent;
+    new public event Action<ItemSlot> OnDropEvent;
     void Awake()
     {
         attachmentPoints = new List<AttachmentPoint>();
-        equipmentSlots = new List<EquipmentSlotFlex>();
+        equipmentSlots = new List<EquipmentSlot>();
     }
     public void ManualStart (List<AttachmentPoint> _attachmentPoints)
     {
@@ -23,7 +23,7 @@ public class EquipmentFlex : InventoryFlex
         foreach(AttachmentPoint x in attachmentPoints)
         {
             GameObject AttachmentTest = CreatePanel("Attachment Point " + i, transform);
-            EquipmentSlotFlex equipmentSlot = AttachmentTest.AddComponent<EquipmentSlotFlex>();
+            EquipmentSlot equipmentSlot = AttachmentTest.AddComponent<EquipmentSlot>();
             equipmentSlot.equipmentType = x.equipmentType;
             equipmentSlot.slotNum = i;
             equipmentSlot.OnRightClickEvent += OnRightClickEvent;
@@ -68,8 +68,8 @@ public class EquipmentFlex : InventoryFlex
     {
         for (int i = 0; i < equipmentSlots.Count; i++)
         {
-            Debug.Log("EQ Slot : " + equipmentSlots[i].equipmentType);
-            Debug.Log("item  : " + item.equipmentType);
+            // Debug.Log("EQ Slot : " + equipmentSlots[i].equipmentType);
+            // Debug.Log("item  : " + item.equipmentType);
             if(equipmentSlots[i].equipmentType == item.equipmentType && equipmentSlots[i].item == null)
             {
                 previousItem = (EquippableItem)equipmentSlots[i].item;
@@ -89,7 +89,7 @@ public class EquipmentFlex : InventoryFlex
         }
         return false;
     }
-    public bool RemoveItem(EquipmentSlotFlex _slot)
+    public bool RemoveItem(EquipmentSlot _slot)
     {
         if (_slot.item != null)
         {

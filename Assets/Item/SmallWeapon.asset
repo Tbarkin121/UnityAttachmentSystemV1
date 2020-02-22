@@ -26,7 +26,7 @@ MonoBehaviour:
   drag: 0
   angularDrag: 0
   armor: 0
-  hpMax: 0
+  hpMax: 25
   perferationResistance: 0
   weaponType: 0
   damage: 0

@@ -19,9 +19,14 @@ public class EquippableItem : Item
     public int armor; //Damage Mitigation
     public int hpMax; //max hit points
     public int perferationResistance; // resistance to internal damage
-    private int hp; //current hit points
     
-    
+    public void TakeDamage(int damage)
+    {
+    }
+    public override void Die ()
+    {
+        base.Die();
+    }
 
 }
 

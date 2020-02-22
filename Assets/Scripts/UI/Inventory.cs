@@ -4,19 +4,19 @@ using UnityEngine;
 using System;
 
 [System.Serializable]
-public class InventoryFlex : VanillaManager
+public class Inventory : VanillaManager
 {
     public List<Item> startingItems;
-    public List<ItemSlotFlex> itemSlots;
-    public event Action<ItemSlotFlex> OnRightClickEvent;
-    public event Action<ItemSlotFlex> OnBeginDragEvent;
-    public event Action<ItemSlotFlex> OnEndDragEvent;
-    public event Action<ItemSlotFlex> OnDragEvent;
-    public event Action<ItemSlotFlex> OnDropEvent;
+    public List<ItemSlot> itemSlots;
+    public event Action<ItemSlot> OnRightClickEvent;
+    public event Action<ItemSlot> OnBeginDragEvent;
+    public event Action<ItemSlot> OnEndDragEvent;
+    public event Action<ItemSlot> OnDragEvent;
+    public event Action<ItemSlot> OnDropEvent;
     private void Awake()
     {
         startingItems = new List<Item>();
-        itemSlots = new List<ItemSlotFlex>();
+        itemSlots = new List<ItemSlot>();
     }
 
     public void ManualStart (Body _bodyData)
@@ -26,7 +26,7 @@ public class InventoryFlex : VanillaManager
         for (int i = 0; i < _bodyData.numInventorySlots; i++)
         {
             GameObject AttachmentTest = CreatePanel("Inventory Slot " + i, transform);
-            ItemSlotFlex itemSlot = AttachmentTest.AddComponent<ItemSlotFlex>();
+            ItemSlot itemSlot = AttachmentTest.AddComponent<ItemSlot>();
             itemSlot.slotNum = i;
             itemSlot.OnRightClickEvent += OnRightClickEvent;
             itemSlot.OnBeginDragEvent += OnBeginDragEvent;
@@ -82,7 +82,7 @@ public class InventoryFlex : VanillaManager
         }
         return false;
     }
-    public bool RemoveItem(ItemSlotFlex itemSlot)
+    public bool RemoveItem(ItemSlot itemSlot)
     {
         if (itemSlot.item != null)
         {

@@ -24,7 +24,7 @@ MonoBehaviour:
   drag: 0
   angularDrag: 0
   armor: 0
-  hpMax: 10
+  hpMax: 50
   perferationResistance: 0
   thrusterType: 0
   maxForce: 1

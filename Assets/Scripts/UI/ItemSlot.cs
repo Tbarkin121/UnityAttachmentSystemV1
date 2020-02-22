@@ -5,14 +5,14 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 [System.Serializable]
-public class ItemSlotFlex : MonoBehaviour, IPointerClickHandler, IDragHandler, IDropHandler, IBeginDragHandler, IEndDragHandler
+public class ItemSlot : MonoBehaviour, IPointerClickHandler, IDragHandler, IDropHandler, IBeginDragHandler, IEndDragHandler
 {
     protected  Image image;
-    public event Action<ItemSlotFlex> OnRightClickEvent;
-    public event Action<ItemSlotFlex> OnBeginDragEvent;
-    public event Action<ItemSlotFlex> OnEndDragEvent;
-    public event Action<ItemSlotFlex> OnDragEvent;
-    public event Action<ItemSlotFlex> OnDropEvent;
+    public event Action<ItemSlot> OnRightClickEvent;
+    public event Action<ItemSlot> OnBeginDragEvent;
+    public event Action<ItemSlot> OnEndDragEvent;
+    public event Action<ItemSlot> OnDragEvent;
+    public event Action<ItemSlot> OnDropEvent;
     protected  Color normalColor = Color.white;
     protected  Color disabledColor = new Color(1,1,1,0);
     
@@ -66,7 +66,7 @@ public class ItemSlotFlex : MonoBehaviour, IPointerClickHandler, IDragHandler, I
     Vector2 origionalPosition;
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("Begin Drag " + OnBeginDragEvent);
+        // Debug.Log("Begin Drag " + OnBeginDragEvent);
         if (OnBeginDragEvent != null)
             OnBeginDragEvent(this);
         // origionalPosition = image.transform.position;
@@ -74,22 +74,22 @@ public class ItemSlotFlex : MonoBehaviour, IPointerClickHandler, IDragHandler, I
     
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("End Drag " + OnEndDragEvent);
+        // Debug.Log("End Drag " + OnEndDragEvent);
         if (OnEndDragEvent != null)
             OnEndDragEvent(this);
         // image.transform.position = origionalPosition;
     }
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("On Drag " + OnDragEvent);
+        // Debug.Log("On Drag " + OnDragEvent);
         if (OnDragEvent != null)
             OnDragEvent(this);
         // image.transform.position = Input.mousePosition;
     }
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("Did we even make it here?");
-        Debug.Log("On Drop " + OnDropEvent);
+        // Debug.Log("Did we even make it here?");
+        // Debug.Log("On Drop " + OnDropEvent);
         if (OnDropEvent != null)
             OnDropEvent(this);
     }

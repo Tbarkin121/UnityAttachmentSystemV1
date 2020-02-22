@@ -9,17 +9,17 @@ public class ShipCoreController : VanillaManager
 {
     public Body bodyData;
     public List<AttachmentPoint> attachmentPoints;
-    public List<EquipmentSlotFlex> equipmentSlots;
+    public List<EquipmentSlot> equipmentSlots;
     
     public Rigidbody2D rb;
     private List<GameObject> physicalAttachmentPoints;
-    public InventoryFlex inventory;
-    public EquipmentFlex equipment;
+    public Inventory inventory;
+    public Equipment equipment;
     private Image draggableItem; //Need to create this still.. should just be a panel like the rest of them
-    private ItemSlotFlex draggedSlot;
+    private ItemSlot draggedSlot;
 
     
-    private void Equip(ItemSlotFlex itemSlot)
+    private void Equip(ItemSlot itemSlot)
     {
         EquippableItem equippableItem = itemSlot.item as EquippableItem;
         if (equippableItem != null)
@@ -27,17 +27,15 @@ public class ShipCoreController : VanillaManager
             Equip(equippableItem, itemSlot);
         }
     }
-    public void Equip(EquippableItem item, ItemSlotFlex itemSlot)
+    public void Equip(EquippableItem item, ItemSlot itemSlot)
     {
         if (inventory.RemoveItem(itemSlot))
         {
             EquippableItem previousItem;
             if (equipment.AddItem(item, out previousItem))
             {
-                Debug.Log("TP2");
                 if (previousItem != null)
                 {
-                    Debug.Log("TP3");
                     inventory.AddItem(previousItem);
                 }
             }
@@ -47,7 +45,7 @@ public class ShipCoreController : VanillaManager
             }
         }
     }
-    private void Unequip(ItemSlotFlex itemSlot)
+    private void Unequip(ItemSlot itemSlot)
     {
         EquippableItem equippableItem = itemSlot.item as EquippableItem;
         if (equippableItem != null)
@@ -55,7 +53,7 @@ public class ShipCoreController : VanillaManager
             Unequip(equippableItem, itemSlot);
         }
     }
-    public void Unequip(EquippableItem item, ItemSlotFlex itemSlot)
+    public void Unequip(EquippableItem item, ItemSlot itemSlot)
     {
         
         if (!inventory.IsFull() && equipment.RemoveItem(itemSlot))
@@ -66,9 +64,9 @@ public class ShipCoreController : VanillaManager
 
     
     
-    private void BeginDrag(ItemSlotFlex itemSlot)
+    private void BeginDrag(ItemSlot itemSlot)
     {
-        Debug.Log("SSC : BeginDrag");
+        // Debug.Log("SSC : BeginDrag");
         if (itemSlot.item != null)
         {
             draggedSlot = itemSlot;
@@ -77,23 +75,23 @@ public class ShipCoreController : VanillaManager
             draggableItem.enabled = true;
         }
     }
-    private void EndDrag(ItemSlotFlex itemSlot)
+    private void EndDrag(ItemSlot itemSlot)
     {
-        Debug.Log("SSC : EndDrag");
+        // Debug.Log("SSC : EndDrag");
         draggedSlot = null;
         draggableItem.enabled = false;
 
     }
-    private void Drag(ItemSlotFlex itemSlot)
+    private void Drag(ItemSlot itemSlot)
     {
-        Debug.Log("SSC : Drag");
+        // Debug.Log("SSC : Drag");
         if (draggableItem.enabled)
         {
             draggableItem.transform.position = Input.mousePosition;
         }
         
     }
-    private void Drop(ItemSlotFlex dropitemSlot)
+    private void Drop(ItemSlot dropitemSlot)
     {
         if (dropitemSlot.CanReceiveItem(draggedSlot.item) && draggedSlot.CanReceiveItem(dropitemSlot.item))
         {
@@ -101,12 +99,12 @@ public class ShipCoreController : VanillaManager
             EquippableItem dropItem = dropitemSlot.item as EquippableItem;
             
             // The below if statements were for stat related functions I've yet to impliment
-            // if (draggedSlot is EquipmentSlotFlex)
+            // if (draggedSlot is EquipmentSlot)
             // {
                 // if (dragItem != null) dragItem.Unequip(this);
                 // if (dropItem != null) dropItem.Equip(this);
             // }
-            // if (dropitemSlot is EquipmentSlotFlex)
+            // if (dropitemSlot is EquipmentSlot)
             // {
                 // if (dragItem != null) dragItem.Equip(this);
                 // if (dropItem != null) dropItem.Unequip(this);
@@ -127,7 +125,7 @@ public class ShipCoreController : VanillaManager
             physicalAttachmentPoints.Add(CreateAttachmentPoints(x, i));
             i++;
         }
-
+        gameObject.GetComponent<HealthMonitor>().health = bodyData.hpMax; 
         print("Ship Core Online!");
     }
 
@@ -140,14 +138,14 @@ public class ShipCoreController : VanillaManager
         SpriteRenderer sr = gameObject.AddComponent<SpriteRenderer>();
         sr.sprite = bodyData.artwork;
         attachmentPoints = bodyData.attachmentPoints;
-        equipmentSlots = new List<EquipmentSlotFlex>();
+        equipmentSlots = new List<EquipmentSlot>();
         Transform _characterPanel = _canvas.transform.Find("Character Panel");
         Transform _inventoryParent = _characterPanel.Find("Inventory Panel");
         Transform _equipmentParent = _characterPanel.Find("Equipment Panel");
         if(_canvas != null)
         {
-            equipment = _equipmentParent.GetComponent<EquipmentFlex>();
-            inventory = _inventoryParent.GetComponent<InventoryFlex>();
+            equipment = _equipmentParent.GetComponent<Equipment>();
+            inventory = _inventoryParent.GetComponent<Inventory>();
             //Right Click
             inventory.OnRightClickEvent += Equip;
             equipment.OnRightClickEvent += Unequip;
@@ -192,6 +190,8 @@ public class ShipCoreController : VanillaManager
         attachmentManager.ship_rb = rb;
         attachmentManager.ParentSlot = equipment.equipmentSlots[idx];
         equipment.equipmentSlots[idx].ChangeEquipmentEvent += attachmentManager.ChangeEquipment;
+        HealthMonitor healthMonitor = attachmentPoint.AddComponent<HealthMonitor>();
+        healthMonitor.health = 0;
         BoxCollider2D bc = attachmentPoint.AddComponent<BoxCollider2D>();
         bc.size = new Vector2(0.05f, 0.1f); //This type of thing should be stored on the body object
         return attachmentPoint;
@@ -207,10 +207,6 @@ public class ShipCoreController : VanillaManager
         }
     }
 
-    public void TestDamage(int component)
-    {
-        physicalAttachmentPoints[component].GetComponent<AttachmentManager>().TakeDamage(25);
-    }
     public void TestWeapon()
     {
         foreach(GameObject x in physicalAttachmentPoints)

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System;
-public class EquipmentSlotFlex : ItemSlotFlex
+public class EquipmentSlot : ItemSlot
 {
-    public event Action<EquipmentSlotFlex> ChangeEquipmentEvent;  
+    public event Action<EquipmentSlot> ChangeEquipmentEvent;  
     private Item _equipment;
     public EquipmentType equipmentType;
     public override Item item
@@ -10,7 +10,7 @@ public class EquipmentSlotFlex : ItemSlotFlex
         get { return _equipment; }
         set 
         {
-            Debug.Log("EquipmentSlotSet");
+            // Debug.Log("EquipmentSlotSet");
             _equipment = value;
             if(_equipment == null) 
             {

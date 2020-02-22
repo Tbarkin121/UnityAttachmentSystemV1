@@ -35,8 +35,8 @@ public class PlayerManager : VanillaManager
 
         AddGridLayoutGroup(EquipmentPanel);
         AddGridLayoutGroup(InventoryPanel);
-        InventoryPanel.AddComponent<InventoryFlex>();
-        EquipmentPanel.AddComponent<EquipmentFlex>();
+        InventoryPanel.AddComponent<Inventory>();
+        EquipmentPanel.AddComponent<Equipment>();
 
         //Arranging Panel Pieces
         ColorPanel(CharacterPanel, purple);
@@ -75,6 +75,8 @@ public class PlayerManager : VanillaManager
             rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
             BoxCollider2D bc = shipCore.AddComponent<BoxCollider2D>();
             bc.size = bodyData.colliderSize;
+            HealthMonitor healthMonitor = shipCore.AddComponent<HealthMonitor>();
+            healthMonitor.health = 0;
 
             return shipCore;
         }
@@ -105,14 +107,6 @@ public class PlayerManager : VanillaManager
         if(Input.GetKey(KeyCode.D))
         {
             shipCore.GetComponent<ShipCoreController>().CPU(0.0f, -1.0f);
-        }
-        if(Input.GetKeyDown(KeyCode.C))
-        {
-            shipCore.GetComponent<ShipCoreController>().TestDamage(0);
-        }
-        if(Input.GetKeyDown(KeyCode.V))
-        {
-            shipCore.GetComponent<ShipCoreController>().TestDamage(1);   
         }
         if(Input.GetKeyDown(KeyCode.Space))
         {

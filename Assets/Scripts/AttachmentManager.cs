@@ -8,11 +8,9 @@ public class AttachmentManager : MonoBehaviour
     public EquippableItem item;
     public EquipmentType equipmentType;
     public Rigidbody2D ship_rb;
-    public float maxHitpoints;
-    public float currentHitpoints;
     public GameObject parent;
-    private EquipmentSlotFlex parentSlot;
-    public EquipmentSlotFlex ParentSlot
+    private EquipmentSlot parentSlot;
+    public EquipmentSlot ParentSlot
     {
         get{return parentSlot;}
         set{parentSlot = value;}
@@ -25,21 +23,21 @@ public class AttachmentManager : MonoBehaviour
         UpdateEquipment(item);
         
     }
-    public void ChangeEquipment (EquipmentSlotFlex _equipmentSlot)
+    public void ChangeEquipment (EquipmentSlot _equipmentSlot)
     {
-        
+   
         SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();
         EquippableItem equippableItem = _equipmentSlot.item as EquippableItem;
-        Debug.Log(_equipmentSlot.item);
+        // Debug.Log(_equipmentSlot.item);
         if(equippableItem != null)
         {
-            Debug.Log(item);
+            // Debug.Log(item);
             item = equippableItem;
-            Debug.Log(item);
+            // Debug.Log(item);
             sr.sprite = item.artwork;
             sr.enabled = true;
             sr.sortingOrder = 1;
-            currentHitpoints = item.hpMax;
+            gameObject.GetComponent<HealthMonitor>().health = item.hpMax;
         }
         else
         {
@@ -56,7 +54,7 @@ public class AttachmentManager : MonoBehaviour
             sr.sprite = item.artwork;
             sr.enabled = true;
             sr.sortingOrder = 1;
-            currentHitpoints = item.hpMax;
+            gameObject.GetComponent<HealthMonitor>().health = item.hpMax;
         }
         else
         {
@@ -93,13 +91,6 @@ public class AttachmentManager : MonoBehaviour
         }
         
     }
-    public void TakeDamage(float _damage)
-    {
-        Debug.Log("Take Damage");
-        currentHitpoints -= _damage;
-        if(currentHitpoints <= 0)
-            Die();
-    }
     public void Fire ()
     {
         Weapon _weapon = item as Weapon;
@@ -128,7 +119,7 @@ public class AttachmentManager : MonoBehaviour
         
     }
 
-    private void Die()
+    public void Die()
     {
         parent.GetComponent<ShipCoreController>().DeathReport(gameObject);
         parentSlot.item = null;

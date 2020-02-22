@@ -72,7 +72,12 @@ public class Missile : MonoBehaviour
             int i = 0;
             foreach(Collider2D x in _blastHits)
             {
-                HealthMonitor _healthMonitor = x.GetComponent<HealthMonitor>();
+                HealthMonitor _healthMonitor = new HealthMonitor();
+                if(x != null)
+                {
+                    _healthMonitor = x.GetComponent<HealthMonitor>();
+                }
+                
                 if( _healthMonitor != null)
                 {
                     // Debug.Log("transform.position : " + i + " " + transform.position);

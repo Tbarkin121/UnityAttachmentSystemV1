@@ -19,13 +19,15 @@ MonoBehaviour:
   attachmentPointLocation: {x: 0, y: 0, z: 0}
   equipmentType: 1
   mainEffect: {fileID: 0}
-  damageEffect: {fileID: 0}
-  destroyedEffect: {fileID: 0}
+  damageEffect: {fileID: 8785600878650142539, guid: bc664ccd7997a2949bdbe6b41928c236,
+    type: 3}
+  destroyedEffect: {fileID: 8076732192902369476, guid: 782b0ec741fe73d4bbd9517e7b83c578,
+    type: 3}
   drag: 0
   angularDrag: 0
   armor: 0
   hpMax: 50
   perferationResistance: 0
   thrusterType: 0
-  maxForce: 1
+  maxForce: 0.1
   forceOffset: {x: 0, y: 0, z: 0}

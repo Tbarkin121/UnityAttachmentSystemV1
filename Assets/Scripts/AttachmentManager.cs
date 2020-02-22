@@ -1,14 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class AttachmentManager : MonoBehaviour
 {
+    
     private bool whichBay = false;
+    private GameObject VFXs;
     public EquippableItem item;
     public EquipmentType equipmentType;
     public Rigidbody2D ship_rb;
     public GameObject parent;
+    private bool isEquiped;
+    private bool isDamaged;
+    private bool isDestroyed;
     private EquipmentSlot parentSlot;
     public EquipmentSlot ParentSlot
     {
@@ -16,13 +22,40 @@ public class AttachmentManager : MonoBehaviour
         set{parentSlot = value;}
     }
 
-    // Start is called before the first frame update
     void Start()
     {
+        isEquiped = false;
+        isDamaged = true;
+        isDestroyed = true;
         SpriteRenderer sr = gameObject.AddComponent<SpriteRenderer>();
         UpdateEquipment(item);
+        VFXs = new GameObject("VFXs");
+        VFXs.transform.SetParent(transform);
+        VFXs.transform.localPosition = new Vector3(0,0,0);
+        VFXs.AddComponent<VFXManager>();
         
     }
+    void Update ()
+    {
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            // damageEffect = Resources.Load<GameObject>("UI/ThrusterButton");
+            List<GameObject> playEffects = new List<GameObject>();
+            if(item != null)
+            {
+                playEffects.Add(item.damageEffect);
+                playEffects.Add(item.destroyedEffect);
+            }
+            VFXs.GetComponent<VFXManager>().EnableEffect(playEffects);                
+        }
+            
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            VFXs.GetComponent<VFXManager>().DisableEffect();   
+        }
+            
+    }
+    
     public void ChangeEquipment (EquipmentSlot _equipmentSlot)
     {
    
@@ -31,6 +64,9 @@ public class AttachmentManager : MonoBehaviour
         // Debug.Log(_equipmentSlot.item);
         if(equippableItem != null)
         {
+            isDamaged = false;
+            isDestroyed = false;
+            isEquiped = true;
             // Debug.Log(item);
             item = equippableItem;
             // Debug.Log(item);
@@ -38,9 +74,13 @@ public class AttachmentManager : MonoBehaviour
             sr.enabled = true;
             sr.sortingOrder = 1;
             gameObject.GetComponent<HealthMonitor>().health = item.hpMax;
+            VFXs.GetComponent<VFXManager>().DisableEffect();
         }
         else
         {
+            isDamaged = true;
+            isDestroyed = true;
+            isEquiped = false;
             item = null;
             sr.enabled = false;
         }
@@ -63,7 +103,6 @@ public class AttachmentManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     public void RequestForce(float _force)
     {
         Thruster _thruster = item as Thruster;
@@ -119,11 +158,55 @@ public class AttachmentManager : MonoBehaviour
         
     }
 
+    public void ReportHealth(int _health)
+    {
+        if(isEquiped)
+        {
+            if (_health < item.hpMax/2)
+            {
+                Damaged();
+            }
+            if(_health <= 0)
+            {
+                Die();
+            }
+        }
+    }
+
     public void Die()
     {
-        parent.GetComponent<ShipCoreController>().DeathReport(gameObject);
-        parentSlot.item = null;
-        // Destroy(gameObject);
+        if(!isDestroyed)
+        {
+            isDestroyed = true;
+            isEquiped = false;
+            List<GameObject> playEffects = new List<GameObject>();
+            if(item != null)
+            {
+                if(item.damageEffect != null)
+                    playEffects.Add(item.damageEffect);
+                if(item.destroyedEffect != null)
+                    playEffects.Add(item.destroyedEffect);
+            }
+            VFXs.GetComponent<VFXManager>().EnableEffect(playEffects);    
+            parent.GetComponent<ShipCoreController>().DeathReport(gameObject);
+            parentSlot.item = null;
+        }
+    }
+    public void Damaged()
+    {
+        if(!isDamaged)
+        {   
+            isDamaged = true;
+            Debug.Log("Damage Effect?");
+            List<GameObject> playEffects = new List<GameObject>();
+            if(item != null)
+            {
+                Debug.Log("TP?");
+                if(item.damageEffect != null)
+                    playEffects.Add(item.damageEffect);
+            }
+            VFXs.GetComponent<VFXManager>().EnableEffect(playEffects);       
+        }
     }
 
 }

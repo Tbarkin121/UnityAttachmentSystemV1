@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu]
 public class EquippableItem : Item
 {
-
     public Vector3 attachmentPointLocation;
     
     public EquipmentType equipmentType;
@@ -20,9 +19,6 @@ public class EquippableItem : Item
     public int hpMax; //max hit points
     public int perferationResistance; // resistance to internal damage
     
-    public void TakeDamage(int damage)
-    {
-    }
     public override void Die ()
     {
         base.Die();

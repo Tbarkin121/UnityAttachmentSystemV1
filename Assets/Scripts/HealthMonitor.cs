@@ -8,16 +8,13 @@ public class HealthMonitor : MonoBehaviour
 
     public void TakeDamage(int _damage)
     {
-        // Debug.Log("Damage Taken : " + _damage);
-        health  -= _damage;
-        if(health <= 0)
+        AttachmentManager _am = gameObject.GetComponent<AttachmentManager>();
+        if(_am != null)
         {
-            // Debug.Log("I should be dead");
-            AttachmentManager _am = gameObject.GetComponent<AttachmentManager>();
-            if(_am != null)
-            {
-                _am.Die();
-            }
+            health  -= _damage;
+            Mathf.Clamp(health,0,1000);
+            _am.ReportHealth(health);
         }
     }
+    
 }

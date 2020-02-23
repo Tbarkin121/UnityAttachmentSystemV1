@@ -17,6 +17,7 @@ MonoBehaviour:
   colliderSize: {x: 0.25, y: 0.25}
   mass: 1
   attachmentPointLocation: {x: 0, y: 0, z: 0}
+  drawLayer: 0
   equipmentType: 1
   mainEffect: {fileID: 0}
   damageEffect: {fileID: 8785600878650142539, guid: bc664ccd7997a2949bdbe6b41928c236,
@@ -29,5 +30,5 @@ MonoBehaviour:
   hpMax: 50
   perferationResistance: 0
   thrusterType: 0
-  maxForce: 0.1
+  maxForce: 0.5
   forceOffset: {x: 0, y: 0, z: 0}

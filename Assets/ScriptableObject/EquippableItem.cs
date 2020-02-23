@@ -6,7 +6,7 @@ using UnityEngine;
 public class EquippableItem : Item
 {
     public Vector3 attachmentPointLocation;
-    
+    public int drawLayer;
     public EquipmentType equipmentType;
     public GameObject mainEffect;
     public GameObject damageEffect;

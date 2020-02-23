@@ -8,6 +8,7 @@ public class AttachmentManager : MonoBehaviour
     
     private bool whichBay = false;
     private GameObject VFXs;
+    private GameObject ImageHolder;
     public EquippableItem item;
     public EquipmentType equipmentType;
     public Rigidbody2D ship_rb;
@@ -27,11 +28,14 @@ public class AttachmentManager : MonoBehaviour
         isEquiped = false;
         isDamaged = true;
         isDestroyed = true;
-        SpriteRenderer sr = gameObject.AddComponent<SpriteRenderer>();
+        ImageHolder = new GameObject("Image Holder");
+        ImageHolder.transform.SetParent(transform);
+        ImageHolder.transform.localPosition = Vector3.zero;
+        SpriteRenderer sr = ImageHolder.AddComponent<SpriteRenderer>();
         UpdateEquipment(item);
         VFXs = new GameObject("VFXs");
         VFXs.transform.SetParent(transform);
-        VFXs.transform.localPosition = new Vector3(0,0,0);
+        VFXs.transform.localPosition =  Vector3.zero;
         VFXs.AddComponent<VFXManager>();
         
     }
@@ -39,19 +43,14 @@ public class AttachmentManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.O))
         {
-            // damageEffect = Resources.Load<GameObject>("UI/ThrusterButton");
-            List<GameObject> playEffects = new List<GameObject>();
-            if(item != null)
-            {
-                playEffects.Add(item.damageEffect);
-                playEffects.Add(item.destroyedEffect);
-            }
-            VFXs.GetComponent<VFXManager>().EnableEffect(playEffects);                
+            Debug.Log("BAH");
+            Weapon _weapon = item as Weapon;
+            if (_weapon != null)
+                gameObject.GetComponent<WeaponManager>().Fire();
         }
             
         if(Input.GetKeyDown(KeyCode.P))
         {
-            VFXs.GetComponent<VFXManager>().DisableEffect();   
         }
             
     }
@@ -59,7 +58,7 @@ public class AttachmentManager : MonoBehaviour
     public void ChangeEquipment (EquipmentSlot _equipmentSlot)
     {
    
-        SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();
+        SpriteRenderer sr = ImageHolder.GetComponent<SpriteRenderer>();
         EquippableItem equippableItem = _equipmentSlot.item as EquippableItem;
         // Debug.Log(_equipmentSlot.item);
         if(equippableItem != null)
@@ -71,10 +70,18 @@ public class AttachmentManager : MonoBehaviour
             item = equippableItem;
             // Debug.Log(item);
             sr.sprite = item.artwork;
+            ImageHolder.transform.localPosition = item.attachmentPointLocation;
+            sr.sortingOrder=item.drawLayer;
             sr.enabled = true;
-            sr.sortingOrder = 1;
             gameObject.GetComponent<HealthMonitor>().health = item.hpMax;
             VFXs.GetComponent<VFXManager>().DisableEffect();
+            if (equippableItem.equipmentType == EquipmentType.Weapon)
+            {
+                Debug.Log("TP1");
+                WeaponManager _wm = gameObject.GetComponent<WeaponManager>();
+                if (_wm != null)
+                    _wm.Item = equippableItem;
+            }
         }
         else
         {
@@ -83,18 +90,24 @@ public class AttachmentManager : MonoBehaviour
             isEquiped = false;
             item = null;
             sr.enabled = false;
+            Debug.Log("TP2");
+            WeaponManager _wm = gameObject.GetComponent<WeaponManager>();
+            if (_wm != null)
+                _wm.Item=null;
         }
     }
     public void UpdateEquipment (EquippableItem _item)
     {
-        SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();
+        SpriteRenderer sr = ImageHolder.GetComponent<SpriteRenderer>();
         if(_item != null)
         {
             item = _item;
             sr.sprite = item.artwork;
+            ImageHolder.transform.localPosition = item.attachmentPointLocation;
             sr.enabled = true;
-            sr.sortingOrder = 1;
+            sr.sortingOrder = item.drawLayer;
             gameObject.GetComponent<HealthMonitor>().health = item.hpMax;
+            
         }
         else
         {
@@ -135,25 +148,26 @@ public class AttachmentManager : MonoBehaviour
         Weapon _weapon = item as Weapon;
         if(_weapon != null)
         {
-            if(whichBay)
-            {
-                whichBay = false;
-                GameObject _missile = Instantiate(_weapon.mainEffect, transform.position, transform.rotation);
-                Rigidbody2D _rb = _missile.GetComponent<Rigidbody2D>();
-                Rigidbody2D _rbp = parent.GetComponent<Rigidbody2D>();
-                _rb.velocity = _rbp.velocity;
-                _rb.angularVelocity = _rbp.angularVelocity;
-                _rb.AddForce(transform.right*20f);
+        //     if(whichBay)
+        //     {
+        //         whichBay = false;
+        //         GameObject _missile = Instantiate(_weapon.mainEffect, transform.position, transform.rotation);
+        //         Rigidbody2D _rb = _missile.GetComponent<Rigidbody2D>();
+        //         Rigidbody2D _rbp = parent.GetComponent<Rigidbody2D>();
+        //         _rb.velocity = _rbp.velocity;
+        //         _rb.angularVelocity = _rbp.angularVelocity;
+        //         _rb.AddForce(transform.right*20f);
                 
-            }else{
-                whichBay = true;
-                GameObject _missile = Instantiate(_weapon.mainEffect, transform.position, transform.rotation);
-                Rigidbody2D _rb = _missile.GetComponent<Rigidbody2D>();
-                Rigidbody2D _rbp = parent.GetComponent<Rigidbody2D>();
-                _rb.velocity = _rbp.velocity;
-                _rb.angularVelocity = _rbp.angularVelocity;
-                _rb.AddForce(-1.0f*transform.right*20f);
-            }
+        //     }else{
+        //         whichBay = true;
+        //         GameObject _missile = Instantiate(_weapon.mainEffect, transform.position, transform.rotation);
+        //         Rigidbody2D _rb = _missile.GetComponent<Rigidbody2D>();
+        //         Rigidbody2D _rbp = parent.GetComponent<Rigidbody2D>();
+        //         _rb.velocity = _rbp.velocity;
+        //         _rb.angularVelocity = _rbp.angularVelocity;
+        //         _rb.AddForce(-1.0f*transform.right*20f);
+        //     }
+            gameObject.GetComponent<WeaponManager>().Fire();
         }
         
     }

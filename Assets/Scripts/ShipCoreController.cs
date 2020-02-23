@@ -194,6 +194,11 @@ public class ShipCoreController : VanillaManager
         healthMonitor.health = 0;
         BoxCollider2D bc = attachmentPoint.AddComponent<BoxCollider2D>();
         bc.size = new Vector2(0.05f, 0.1f); //This type of thing should be stored on the body object
+        if (attachmentManager.equipmentType == EquipmentType.Weapon)
+        {
+            WeaponManager wm = attachmentPoint.AddComponent<WeaponManager>();
+        }
+            
         return attachmentPoint;
     }
 

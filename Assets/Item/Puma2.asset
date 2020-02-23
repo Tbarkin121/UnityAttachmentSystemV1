@@ -18,6 +18,7 @@ MonoBehaviour:
   colliderSize: {x: 0.25, y: 0.25}
   mass: 1
   attachmentPointLocation: {x: 0, y: 0, z: 0}
+  drawLayer: 0
   equipmentType: 0
   mainEffect: {fileID: 0}
   damageEffect: {fileID: 0}
@@ -45,5 +46,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0267050532bb52e429619b7be9e73ac1, type: 2}
   - {fileID: 11400000, guid: d6356028d622ac249ae09022a8f1f588, type: 2}
   - {fileID: 11400000, guid: d6356028d622ac249ae09022a8f1f588, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: dc217515181297d479bf30476e829789, type: 2}
   - {fileID: 0}

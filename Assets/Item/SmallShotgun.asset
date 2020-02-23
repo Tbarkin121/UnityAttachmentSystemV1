@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a2c07bf9253a02449e2ce4ee4a0df36, type: 3}
+  m_Name: SmallShotgun
+  m_EditorClassIdentifier: 
+  name: Shotgun
+  artwork: {fileID: 21300000, guid: 9af80bfe6d586b34aa49a2ab64387811, type: 3}
+  colliderSize: {x: 0, y: 0}
+  mass: 1
+  attachmentPointLocation: {x: -0.035, y: 0.155, z: 0}
+  drawLayer: -1
+  equipmentType: 2
+  mainEffect: {fileID: 8148795122344494281, guid: 5408990e986ec31438f1190dde66d8f2,
+    type: 3}
+  damageEffect: {fileID: 0}
+  destroyedEffect: {fileID: 0}
+  drag: 0
+  angularDrag: 0
+  armor: 0
+  hpMax: 0
+  perferationResistance: 0
+  weaponType: 2
+  damage: 1
+  perferationPower: 0
+  firePoint: {x: -0.04, y: 0.235, z: 0}

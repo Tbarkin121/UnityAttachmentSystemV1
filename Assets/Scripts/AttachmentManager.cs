@@ -148,25 +148,7 @@ public class AttachmentManager : MonoBehaviour
         Weapon _weapon = item as Weapon;
         if(_weapon != null)
         {
-        //     if(whichBay)
-        //     {
-        //         whichBay = false;
-        //         GameObject _missile = Instantiate(_weapon.mainEffect, transform.position, transform.rotation);
-        //         Rigidbody2D _rb = _missile.GetComponent<Rigidbody2D>();
-        //         Rigidbody2D _rbp = parent.GetComponent<Rigidbody2D>();
-        //         _rb.velocity = _rbp.velocity;
-        //         _rb.angularVelocity = _rbp.angularVelocity;
-        //         _rb.AddForce(transform.right*20f);
-                
-        //     }else{
-        //         whichBay = true;
-        //         GameObject _missile = Instantiate(_weapon.mainEffect, transform.position, transform.rotation);
-        //         Rigidbody2D _rb = _missile.GetComponent<Rigidbody2D>();
-        //         Rigidbody2D _rbp = parent.GetComponent<Rigidbody2D>();
-        //         _rb.velocity = _rbp.velocity;
-        //         _rb.angularVelocity = _rbp.angularVelocity;
-        //         _rb.AddForce(-1.0f*transform.right*20f);
-        //     }
+
             gameObject.GetComponent<WeaponManager>().Fire();
         }
         

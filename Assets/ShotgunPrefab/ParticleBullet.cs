@@ -6,6 +6,7 @@ public class ParticleBullet : MonoBehaviour
 {
     public ParticleSystem ps;
     public List<ParticleCollisionEvent> collisionEvents;
+    public int damage = 1;
     void Start ()
     {
         ps = GetComponent<ParticleSystem>();
@@ -17,14 +18,20 @@ public class ParticleBullet : MonoBehaviour
         int numCollisionEvents = ps.GetCollisionEvents(other, collisionEvents);
 
         Rigidbody2D rb = other.GetComponent<Rigidbody2D>();
+        HealthMonitor hm = other.GetComponent<HealthMonitor>();
+        Debug.Log(hm);
         int i = 0;
         while (i < numCollisionEvents)
         {
             if (rb)
             {
                 Vector3 pos = collisionEvents[i].intersection;
-                Vector3 force = collisionEvents[i].velocity * 1;
+                Vector3 force = collisionEvents[i].velocity * 0.25f;
                 rb.AddForce(force);
+            }
+            if (hm)
+            {
+                hm.TakeDamage(damage);
             }
             i++;
         }

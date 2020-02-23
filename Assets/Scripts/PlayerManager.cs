@@ -79,8 +79,6 @@ public class PlayerManager : VanillaManager
             healthMonitor.health = 0;
             GameObject particleDetector = new GameObject("Particle Detector");
             particleDetector.transform.SetParent(shipCore.transform);
-            BoxCollider particleCollider = particleDetector.AddComponent<BoxCollider>();
-            particleCollider.size = new Vector3(0.25f, 0.22f, 0.1f);
 
             return shipCore;
         }

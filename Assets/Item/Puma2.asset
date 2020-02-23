@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Puma
   artwork: {fileID: -5174345661739938750, guid: 524a1ed065583964c9182e347fa94a07,
     type: 3}
-  colliderSize: {x: 0.25, y: 0.25}
+  colliderSize: {x: 0.1, y: 0.25}
   mass: 1
   attachmentPointLocation: {x: 0, y: 0, z: 0}
   drawLayer: 0

@@ -5,8 +5,8 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
     bool weaponEquipped = false;
-    private ParticleSystem particleSystem;
     private List<GameObject> emitters;
+    private bool whichBay = false;
     private EquippableItem item;
     public EquippableItem Item
     {
@@ -75,17 +75,39 @@ public class WeaponManager : MonoBehaviour
             switch(weapon.weaponType)
             {
             case WeaponType.Missile:
-                            break;
-                        case WeaponType.Particle:
-                            foreach(GameObject x in emitters)
-                            {
-                                x.GetComponentInChildren<ParticleSystem>().Play();
-                            }
-                            break;
-                        case WeaponType.Laser:
-                            break;
-                        default:
-                            break;
+                if(whichBay)
+                {
+                    whichBay = false;
+                    GameObject _missile = Instantiate(weapon.mainEffect, transform.position, transform.rotation);
+                    Rigidbody2D _rb = _missile.GetComponent<Rigidbody2D>();
+                    Rigidbody2D _rbp = transform.parent.GetComponent<Rigidbody2D>();
+                    _rb.velocity = _rbp.velocity;
+                    _rb.angularVelocity = _rbp.angularVelocity;
+                    _rb.AddForce(transform.right*20f);
+                    
+                }else{
+                    whichBay = true;
+                    GameObject _missile = Instantiate(weapon.mainEffect, transform.position, transform.rotation);
+                    Rigidbody2D _rb = _missile.GetComponent<Rigidbody2D>();
+                    Rigidbody2D _rbp = transform.parent.GetComponent<Rigidbody2D>();
+                    _rb.velocity = _rbp.velocity;
+                    _rb.angularVelocity = _rbp.angularVelocity;
+                    _rb.AddForce(-1.0f*transform.right*20f);
+                }
+                break;
+
+            case WeaponType.Particle:
+                foreach(GameObject x in emitters)
+                {
+                    x.GetComponentInChildren<ParticleSystem>().Play();
+                }
+                break;
+
+            case WeaponType.Laser:
+                break;
+
+            default:
+                break;
             }
         }
             

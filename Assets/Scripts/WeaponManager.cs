@@ -104,6 +104,17 @@ public class WeaponManager : MonoBehaviour
                 break;
 
             case WeaponType.Laser:
+                Debug.Log("Firing Laser");
+                RaycastHit2D hitInfo = Physics2D.Raycast(weapon.firePoint, transform.up);
+                if (hitInfo)
+                {
+                    HealthMonitor hm = hitInfo.transform.GetComponent<HealthMonitor>();
+                    if(hm != null)
+                    {
+                        hm.TakeDamage(weapon.damage);
+                    }
+                    Debug.Log(hitInfo.transform.name);
+                }
                 break;
 
             default:

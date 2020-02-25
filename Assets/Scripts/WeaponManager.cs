@@ -8,6 +8,7 @@ public class WeaponManager : MonoBehaviour
     private List<GameObject> emitters;
     private bool whichBay = false;
     private EquippableItem item;
+    private List<GameObject> lineRenderers;
     public EquippableItem Item
     {
         get{return item;}
@@ -26,13 +27,18 @@ public class WeaponManager : MonoBehaviour
                         case WeaponType.Missile:
                             break;
                         case WeaponType.Particle:
-                            GameObject _go = Instantiate(weapon.mainEffect, transform.position, transform.rotation);
-                            _go.transform.SetParent(transform);
-                            _go.transform.localPosition = weapon.firePoint;
-                            _go.transform.localRotation = Quaternion.identity;
-                            emitters.Add(_go);
+                            GameObject _blaster = Instantiate(weapon.mainEffect, transform.position, transform.rotation);
+                            _blaster.transform.SetParent(transform);
+                            _blaster.transform.localPosition = weapon.firePoint;
+                            _blaster.transform.localRotation = Quaternion.identity;
+                            emitters.Add(_blaster);
                             break;
                         case WeaponType.Laser:
+                            GameObject _laser = Instantiate(weapon.mainEffect, transform.position, transform.rotation);
+                            _laser.transform.SetParent(transform);
+                            _laser.transform.localPosition = weapon.firePoint;
+                            _laser.transform.localRotation = Quaternion.identity;
+                            lineRenderers.Add(_laser);
                             break;
                         default:
                             Debug.LogWarning("What type of weapon is this anyways!?!?");
@@ -48,6 +54,11 @@ public class WeaponManager : MonoBehaviour
                         Destroy(x);
                     }
                     emitters.Clear();
+                    foreach(GameObject x in lineRenderers)
+                    {
+                        Destroy(x);
+                    }
+                    lineRenderers.Clear();
                     Debug.LogWarning("Weapon is Null!");
                 }
                 
@@ -65,6 +76,7 @@ public class WeaponManager : MonoBehaviour
     void Start ()
     {
         emitters = new List<GameObject>();
+        lineRenderers = new List<GameObject>();
     }
 
     public void Fire()
@@ -105,15 +117,28 @@ public class WeaponManager : MonoBehaviour
 
             case WeaponType.Laser:
                 Debug.Log("Firing Laser");
-                RaycastHit2D hitInfo = Physics2D.Raycast(weapon.firePoint, transform.up);
-                if (hitInfo)
+                foreach(GameObject x in lineRenderers)
                 {
-                    HealthMonitor hm = hitInfo.transform.GetComponent<HealthMonitor>();
-                    if(hm != null)
+                    LineRenderer lr = x.GetComponent<LineRenderer>();
+                    RaycastHit2D hitInfo = Physics2D.Raycast(transform.position+transform.up * 0.5f, transform.up);
+                    if (hitInfo)
                     {
-                        hm.TakeDamage(weapon.damage);
+                        HealthMonitor hm = hitInfo.collider.transform.GetComponent<HealthMonitor>();
+                        if(hm != null)
+                        {
+                            hm.TakeDamage(weapon.damage);
+                        }
+                        Debug.Log(hitInfo.collider.transform.name);
+                        lr.SetPosition (0, transform.position + transform.rotation * weapon.firePoint);
+                        lr.SetPosition(1, hitInfo.point);
                     }
-                    Debug.Log(hitInfo.transform.name);
+                    else
+                    {
+                        lr.SetPosition (0, transform.position + transform.rotation * weapon.firePoint);
+                        lr.SetPosition(1, transform.position  + transform.up);
+                    }
+                    Debug.Log(lineRenderers);
+                    StartCoroutine(ShowLaser(lr));
                 }
                 break;
 
@@ -122,5 +147,13 @@ public class WeaponManager : MonoBehaviour
             }
         }
             
+    }
+
+    IEnumerator ShowLaser(LineRenderer _lr)
+    {
+        _lr.enabled = true;
+        yield return 0;
+        _lr.enabled = false;
+
     }
 }

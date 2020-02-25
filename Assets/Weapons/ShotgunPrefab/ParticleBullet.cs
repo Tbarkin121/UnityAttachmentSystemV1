@@ -16,7 +16,6 @@ public class ParticleBullet : MonoBehaviour
     {
         Debug.Log("Do we ever see this happen?");
         int numCollisionEvents = ps.GetCollisionEvents(other, collisionEvents);
-
         Rigidbody2D rb = other.GetComponent<Rigidbody2D>();
         HealthMonitor hm = other.GetComponent<HealthMonitor>();
         Debug.Log(hm);

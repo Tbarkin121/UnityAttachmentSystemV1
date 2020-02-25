@@ -17,9 +17,10 @@ MonoBehaviour:
   colliderSize: {x: 0.25, y: 0.25}
   mass: 1
   attachmentPointLocation: {x: 0.005, y: 0.075, z: 0}
-  drawLayer: 0
+  drawLayer: 10
   equipmentType: 2
-  mainEffect: {fileID: 0}
+  mainEffect: {fileID: 1115021346787701222, guid: 5614eebf95e83384fb53e220c6d66a61,
+    type: 3}
   damageEffect: {fileID: 0}
   destroyedEffect: {fileID: 0}
   drag: 0
@@ -30,4 +31,4 @@ MonoBehaviour:
   weaponType: 1
   damage: 1
   perferationPower: 0
-  firePoint: {x: 0.5, y: 0.5, z: 0}
+  firePoint: {x: 0, y: 0.1, z: 0}

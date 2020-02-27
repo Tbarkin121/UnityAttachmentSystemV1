@@ -10,7 +10,6 @@ public class ShipCoreController : VanillaManager
     public Body bodyData;
     public List<AttachmentPoint> attachmentPoints;
     public List<EquipmentSlot> equipmentSlots;
-    
     public Rigidbody2D rb;
     private List<GameObject> physicalAttachmentPoints;
     public Inventory inventory;
@@ -193,6 +192,11 @@ public class ShipCoreController : VanillaManager
         HealthMonitor healthMonitor = attachmentPoint.AddComponent<HealthMonitor>();
         healthMonitor.health = 0;
         BoxCollider2D bc = attachmentPoint.AddComponent<BoxCollider2D>();
+        Physics2D.IgnoreCollision(bc, gameObject.GetComponent<BoxCollider2D>());
+        Rigidbody2D _rb = attachmentPoint.AddComponent<Rigidbody2D>();
+        _rb.bodyType = RigidbodyType2D.Kinematic;
+        _rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; 
+        
         bc.size = new Vector2(0.05f, 0.1f); //This type of thing should be stored on the body object
         if (attachmentManager.equipmentType == EquipmentType.Weapon)
         {

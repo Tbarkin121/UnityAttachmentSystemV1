@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class ShipCoreController : VanillaManager
+public class ShipCoreController : UIFunctions
 {
     public Body bodyData;
     public List<AttachmentPoint> attachmentPoints;
@@ -125,10 +125,11 @@ public class ShipCoreController : VanillaManager
             i++;
         }
         gameObject.GetComponent<HealthMonitor>().health = bodyData.hpMax; 
+        
+        
+        // ShapePolygonCollider();
         print("Ship Core Online!");
     }
-
-    
     
     public void StartUI(Canvas _canvas)
     {
@@ -136,6 +137,7 @@ public class ShipCoreController : VanillaManager
         
         SpriteRenderer sr = gameObject.AddComponent<SpriteRenderer>();
         sr.sprite = bodyData.artwork;
+        PolygonCollider2D pc = gameObject.AddComponent<PolygonCollider2D>();
         attachmentPoints = bodyData.attachmentPoints;
         equipmentSlots = new List<EquipmentSlot>();
         Transform _characterPanel = _canvas.transform.Find("Character Panel");
@@ -192,7 +194,7 @@ public class ShipCoreController : VanillaManager
         HealthMonitor healthMonitor = attachmentPoint.AddComponent<HealthMonitor>();
         healthMonitor.health = 0;
         BoxCollider2D bc = attachmentPoint.AddComponent<BoxCollider2D>();
-        Physics2D.IgnoreCollision(bc, gameObject.GetComponent<BoxCollider2D>());
+        Physics2D.IgnoreCollision(bc, gameObject.GetComponent<PolygonCollider2D>());
         Rigidbody2D _rb = attachmentPoint.AddComponent<Rigidbody2D>();
         _rb.bodyType = RigidbodyType2D.Kinematic;
         _rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; 

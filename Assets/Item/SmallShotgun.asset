@@ -28,6 +28,19 @@ MonoBehaviour:
   armor: 0
   hpMax: 0
   perferationResistance: 0
+  PolyPts:
+  - 0.04
+  - -0.08
+  - -0.02
+  - 0.06
+  - -0.03
+  - 0.08
+  - 0.02
+  - 0.06
+  - 0.01
+  - -0.02
+  - 0.02
+  - -0.05
   weaponType: 2
   damage: 1
   perferationPower: 0

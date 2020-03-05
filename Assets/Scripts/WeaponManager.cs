@@ -120,7 +120,8 @@ public class WeaponManager : MonoBehaviour
                 foreach(GameObject x in lineRenderers)
                 {
                     LineRenderer lr = x.GetComponent<LineRenderer>();
-                    RaycastHit2D hitInfo = Physics2D.Raycast(transform.position+transform.up * 0.5f, transform.up);
+                    RaycastHit2D hitInfo = Physics2D.Raycast(transform.position+transform.up * 0.25f, transform.up);
+                    Debug.Log(hitInfo.point);
                     if (hitInfo)
                     {
                         HealthMonitor hm = hitInfo.collider.transform.GetComponent<HealthMonitor>();

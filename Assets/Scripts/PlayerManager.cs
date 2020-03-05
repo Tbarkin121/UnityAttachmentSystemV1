@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class PlayerManager : VanillaManager
+public class PlayerManager : UIFunctions
 {
     public Body bodyData;
     private GameObject shipCore;
@@ -73,8 +73,8 @@ public class PlayerManager : VanillaManager
             rb.drag = bodyData.drag;
             rb.angularDrag = bodyData.angularDrag;
             rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-            BoxCollider2D bc = shipCore.AddComponent<BoxCollider2D>();
-            bc.size = bodyData.colliderSize;
+            // BoxCollider2D bc = shipCore.AddComponent<BoxCollider2D>();
+            // bc.size = bodyData.colliderSize;
             HealthMonitor healthMonitor = shipCore.AddComponent<HealthMonitor>();
             healthMonitor.health = 0;
             GameObject particleDetector = new GameObject("Particle Detector");

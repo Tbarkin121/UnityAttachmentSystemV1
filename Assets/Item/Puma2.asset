@@ -28,6 +28,11 @@ MonoBehaviour:
   armor: 1
   hpMax: 100
   perferationResistance: 1
+  polygonColliderRectPositions:
+  - 0.5
+  - 0.5
+  - -0.5
+  - -0.5
   numInventorySlots: 10
   attachmentPoints:
   - name: RightThruster

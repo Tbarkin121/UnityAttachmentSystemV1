@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 public class TestPlayerManager : MonoBehaviour
 {
+    public EquippableItem bodyItem;
+    public EquippableItem thrusterItem;
 
     void Start ()
     {
         EqFunctions eq = gameObject.AddComponent<EqFunctions>();
         eq.GrandestParent = true;
-        eq.partType = PartType.Body;
+        eq.CreatePart(bodyItem, "Core");
         
     }
 

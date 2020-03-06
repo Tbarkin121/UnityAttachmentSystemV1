@@ -10,23 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec99c1751d35cbb488a38236a765445b, type: 3}
-  m_Name: Body2
+  m_Name: P1911
   m_EditorClassIdentifier: 
-  name: New Item
-  artwork: {fileID: 0}
-  colliderSize: {x: 0, y: 0}
-  mass: 0
+  name: P1911
+  artwork: {fileID: -4494985858403269606, guid: 524a1ed065583964c9182e347fa94a07,
+    type: 3}
+  colliderSize: {x: 0.1, y: 0.5}
+  mass: 1
   attachmentPointLocation: {x: 0, y: 0, z: 0}
   drawLayer: 0
   equipmentType: 0
   mainEffect: {fileID: 0}
   damageEffect: {fileID: 0}
   destroyedEffect: {fileID: 0}
-  drag: 0
-  angularDrag: 0
-  armor: 0
-  hpMax: 0
-  perferationResistance: 0
+  drag: 0.5
+  angularDrag: 0.5
+  armor: 1
+  hpMax: 100
+  perferationResistance: 1
   PolyPts: []
   numInventorySlots: 0
   attachmentPoints: []

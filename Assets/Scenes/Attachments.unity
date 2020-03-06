@@ -279,6 +279,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d79b86e36712d01469419370e7ebf092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bodyItem: {fileID: 11400000, guid: 1f08ffa304e226143932ac643ac74c3d, type: 2}
+  thrusterItem: {fileID: 11400000, guid: 0267050532bb52e429619b7be9e73ac1, type: 2}
 --- !u!4 &1058610118
 Transform:
   m_ObjectHideFlags: 0

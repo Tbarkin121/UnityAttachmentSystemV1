@@ -28,7 +28,18 @@ MonoBehaviour:
   armor: 1
   hpMax: 100
   perferationResistance: 1
-  PolyPts: []
-  numInventorySlots: 0
-  attachmentPoints: []
-  items: []
+  numInventorySlots: 10
+  attachmentPoints:
+  - name: RightThruster
+    equipmentType: 1
+    location: {x: -0.05, y: 0}
+  - name: LeftThruster
+    equipmentType: 1
+    location: {x: 0.05, y: 0}
+  - name: MainWeapon
+    equipmentType: 2
+    location: {x: 0, y: 0}
+  items:
+  - {fileID: 11400000, guid: 0267050532bb52e429619b7be9e73ac1, type: 2}
+  - {fileID: 11400000, guid: 0267050532bb52e429619b7be9e73ac1, type: 2}
+  - {fileID: 11400000, guid: cd06b175e39188c49adf4713a886b3bb, type: 2}

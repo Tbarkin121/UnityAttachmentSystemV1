@@ -18,7 +18,6 @@ public class EquippableItem : Item
     public int armor; //Damage Mitigation
     public int hpMax; //max hit points
     public int perferationResistance; // resistance to internal damage
-    public float[] PolyPts;
     
     public override void Die ()
     {

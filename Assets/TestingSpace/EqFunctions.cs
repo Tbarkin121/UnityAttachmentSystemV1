@@ -1,4 +1,4 @@
-﻿    using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,49 +25,60 @@ public class EqFunctions : MonoBehaviour
     }
     public void CreatePart(EquippableItem _part, string _name)
     {
-        
-        
-        if(currentDepth < 3)
+        if( currentDepth < 3 )
         {
-            Rigidbody2D rb;
-            GameObject child = new GameObject(_name);
-            child.transform.SetParent(transform);
-            child.transform.localPosition = Vector3.zero;
-            child.transform.rotation = Quaternion.identity;
-            child.tag = "VehiclePart";
-            EqFunctions eq = child.AddComponent<EqFunctions>();
-            eq.equippableItem = _part;
-            eq.CurrentDepth = currentDepth + 1;
-            eq.GrandestParentObj = GrandestParentObj;
+            GameObject child = CreateGameObject(_name);
+            EqFunctions eq = CreateEqFunctions(_part, child);
             eq.EquipItem(_part);
-            
-            switch(_part.equipmentType)
-            {
-                case EquipmentType.Body:
-                    Debug.Log("Detected Body Type");
-                    rb = child.AddComponent<Rigidbody2D>();
-                    rb.gravityScale = 0;
-                    rb.drag = _part.drag;
-                    rb.angularDrag = _part.angularDrag;
-                    rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-                    break;
-                case EquipmentType.Thruster:
-                    Debug.Log("Detected Thruster Type");
-                    rb = child.AddComponent<Rigidbody2D>();
-                    rb.bodyType = RigidbodyType2D.Kinematic;
-                    rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; 
-                    break;
-                default:
-                    break;
-            }
+            CreateRigidBody(_part, child);            
         }
     }
+    private GameObject CreateGameObject(string _name)
+    {
+        GameObject child = new GameObject(_name);
+        child.transform.SetParent(transform);
+        child.transform.localPosition = Vector3.zero;
+        child.transform.rotation = Quaternion.identity;
+        child.tag = "VehiclePart";
+        return child;
+    }
+    private EqFunctions CreateEqFunctions(EquippableItem _part, GameObject _child)
+    {
+        EqFunctions eq = _child.AddComponent<EqFunctions>();
+        eq.CurrentDepth = currentDepth + 1;
+        eq.GrandestParentObj = GrandestParentObj;
+        return eq;
+    }
+    private void CreateRigidBody(EquippableItem _part, GameObject _child)
+    {
+        Rigidbody2D rb;
+        switch(_part.equipmentType)
+        {
+            case EquipmentType.Body:
+                Debug.Log("Detected Body Type");
+                rb = _child.AddComponent<Rigidbody2D>();
+                rb.gravityScale = 0;
+                rb.drag = _part.drag;
+                rb.angularDrag = _part.angularDrag;
+                rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+                break;
+            case EquipmentType.Thruster:
+                Debug.Log("Detected Thruster Type");
+                rb = _child.AddComponent<Rigidbody2D>();
+                rb.bodyType = RigidbodyType2D.Kinematic;
+                rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; 
+                break;
+            default:
+                break;
+        }
+    }
+    
     private void EquipItem(EquippableItem _item)
     {
         equippableItem = _item;
         DrawArtwork(equippableItem);
         CreatePolygonCollider();
-        CreateHealthMonitor();
+        CreateHealthMonitor(_item.hpMax);
     }
     private void DrawArtwork(EquippableItem _item)
     {
@@ -90,10 +101,10 @@ public class EqFunctions : MonoBehaviour
     {
         PolygonCollider2D pc = gameObject.AddComponent<PolygonCollider2D>();
     }
-    private void CreateHealthMonitor()
+    private void CreateHealthMonitor(int _healthPoints)
     {
         HealthMonitor healthMonitor = gameObject.AddComponent<HealthMonitor>();
-        healthMonitor.health = 0;
+        healthMonitor.health = _healthPoints;
     }
     void Start()
     {

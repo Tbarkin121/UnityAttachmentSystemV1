@@ -77,8 +77,6 @@ public class PlayerManager : UIFunctions
             // bc.size = bodyData.colliderSize;
             HealthMonitor healthMonitor = shipCore.AddComponent<HealthMonitor>();
             healthMonitor.health = 0;
-            GameObject particleDetector = new GameObject("Particle Detector");
-            particleDetector.transform.SetParent(shipCore.transform);
 
             return shipCore;
         }

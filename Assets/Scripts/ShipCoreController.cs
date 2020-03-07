@@ -14,7 +14,7 @@ public class ShipCoreController : UIFunctions
     private List<GameObject> physicalAttachmentPoints;
     public Inventory inventory;
     public Equipment equipment;
-    private Image draggableItem; //Need to create this still.. should just be a panel like the rest of them
+    private Image draggableItem; 
     private ItemSlot draggedSlot;
 
     

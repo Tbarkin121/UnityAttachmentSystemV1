@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,6 +34,7 @@ public class EqFunctions : MonoBehaviour
             child.transform.SetParent(transform);
             child.transform.localPosition = Vector3.zero;
             child.transform.rotation = Quaternion.identity;
+            child.tag = "VehiclePart";
             EqFunctions eq = child.AddComponent<EqFunctions>();
             eq.equippableItem = _part;
             eq.CurrentDepth = currentDepth + 1;
@@ -66,6 +67,7 @@ public class EqFunctions : MonoBehaviour
         equippableItem = _item;
         DrawArtwork(equippableItem);
         CreatePolygonCollider();
+        CreateHealthMonitor();
     }
     private void DrawArtwork(EquippableItem _item)
     {
@@ -88,7 +90,11 @@ public class EqFunctions : MonoBehaviour
     {
         PolygonCollider2D pc = gameObject.AddComponent<PolygonCollider2D>();
     }
-
+    private void CreateHealthMonitor()
+    {
+        HealthMonitor healthMonitor = gameObject.AddComponent<HealthMonitor>();
+        healthMonitor.health = 0;
+    }
     void Start()
     {
         // CreatePart(PartType.Thruster);

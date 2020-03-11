@@ -281,6 +281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyItem: {fileID: 11400000, guid: 1f08ffa304e226143932ac643ac74c3d, type: 2}
   thrusterItem: {fileID: 11400000, guid: 0267050532bb52e429619b7be9e73ac1, type: 2}
+  weaponItem: {fileID: 11400000, guid: cd06b175e39188c49adf4713a886b3bb, type: 2}
 --- !u!4 &1058610118
 Transform:
   m_ObjectHideFlags: 0

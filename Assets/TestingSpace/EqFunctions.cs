@@ -5,6 +5,8 @@ using UnityEngine;
 public class EqFunctions : MonoBehaviour
 {
     public bool isGrandestParent = false;
+    private List<GameObject> ThrusterGroup;
+    private List<GameObject> WeaponGroup;
     public EqFunctions GrandestParentObj;
     public EquippableItem equippableItem{get;set;}
     public int currentDepth = 0;
@@ -21,8 +23,11 @@ public class EqFunctions : MonoBehaviour
             isGrandestParent = value;
             currentDepth = 0;
             GrandestParentObj = gameObject.GetComponent<EqFunctions>();
+            ThrusterGroup = new List<GameObject>();
+            WeaponGroup = new List<GameObject>();
         }
     }
+
     public void Initalizer(Vector3 _pos, Quaternion _rot)
     {
         transform.localPosition = _pos;
@@ -62,8 +67,9 @@ public class EqFunctions : MonoBehaviour
     public void EquipItem(EquippableItem _part)
     {
         equippableItem = _part;
+        GrandestParentObj.RegisterItem(gameObject);
         DrawArtwork(equippableItem);
-        CreatePolygonCollider(null);
+        CreatePolygonCollider();
         CreateHealthMonitor(_part.hpMax);
         Rigidbody2D rb;
         switch(_part.equipmentType)
@@ -77,14 +83,35 @@ public class EqFunctions : MonoBehaviour
                 rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
                 break;
             case EquipmentType.Thruster:
-                Debug.Log("Detected Thruster Type");
+                break;
+            default:
+                Debug.Log("Detected Default Type");
                 rb = gameObject.AddComponent<Rigidbody2D>();
                 rb.bodyType = RigidbodyType2D.Kinematic;
                 rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
                 break;
-            default:
+        }
+    }
+    public void RegisterItem(GameObject _gameObject)
+    {
+        switch(_gameObject.GetComponent<EqFunctions>().equippableItem.equipmentType)
+        {
+            case EquipmentType.Weapon:
+                Debug.Log("Register Weapon");
+                WeaponGroup.Add(_gameObject);
+                break;
+
+            case EquipmentType.Thruster:
+                Debug.Log("Register Thruster");
+                ThrusterGroup.Add(_gameObject);
+                break;
+
+            case EquipmentType.Body:
+                Debug.Log("Register Body");
                 break;
         }
+        
+        
     }
     private void DrawArtwork(EquippableItem _item)
     {
@@ -101,11 +128,15 @@ public class EqFunctions : MonoBehaviour
             sr.sortingOrder = _item.drawLayer;
         }
     }
-    private void CreatePolygonCollider(PolygonCollider2D _parent_pc)
+    private void CreatePolygonCollider()
     {
         PolygonCollider2D pc = gameObject.AddComponent<PolygonCollider2D>();
+        
+    }
+    public void IgnoreCollisionsWith(PolygonCollider2D _parent_pc)
+    {
         if(_parent_pc != null)
-            Physics2D.IgnoreCollision(pc, _parent_pc);
+            Physics2D.IgnoreCollision(gameObject.GetComponent<PolygonCollider2D>(), _parent_pc);
     }
     private void CreateHealthMonitor(int _healthPoints)
     {

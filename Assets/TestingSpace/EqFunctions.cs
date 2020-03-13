@@ -5,8 +5,8 @@ using UnityEngine;
 public class EqFunctions : MonoBehaviour
 {
     public bool isGrandestParent = false;
-    private List<GameObject> ThrusterGroup;
-    private List<GameObject> WeaponGroup;
+    public List<GameObject> ThrusterGroup;
+    public List<GameObject> WeaponGroup;
     public EqFunctions GrandestParentObj;
     public EquippableItem equippableItem{get;set;}
     public int currentDepth = 0;
@@ -21,10 +21,16 @@ public class EqFunctions : MonoBehaviour
         set 
         {
             isGrandestParent = value;
-            currentDepth = 0;
-            GrandestParentObj = gameObject.GetComponent<EqFunctions>();
-            ThrusterGroup = new List<GameObject>();
-            WeaponGroup = new List<GameObject>();
+            if(value == true)
+            {
+                currentDepth = 0;
+                GrandestParentObj = gameObject.GetComponent<EqFunctions>();
+                ThrusterGroup = new List<GameObject>();
+                WeaponGroup = new List<GameObject>();
+                WeaponControlUnit wcu = gameObject.AddComponent<WeaponControlUnit>();
+                ThrusterControlUnit tcu = gameObject.AddComponent<ThrusterControlUnit>();
+                tcu.Init(GrandestParentObj);
+            }            
         }
     }
 

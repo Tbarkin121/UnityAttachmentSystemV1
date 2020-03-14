@@ -6,29 +6,34 @@ public class ThrusterControlUnit : MonoBehaviour
 {
     private EqFunctions GrandestParentObj;
     TCU_LEVEL tcu_lvl;
+    GameObject _core;
     public void Init(EqFunctions _grandestParentObject)
     {
         GrandestParentObj = _grandestParentObject;
         tcu_lvl = TCU_LEVEL.LVL0;
+    }
+    void Start()
+    {
+        _core = GrandestParentObj.gameObject.GetComponent<TestPlayerManager>().core;
     }
     
     void Update()
     {
         if(Input.GetKey(KeyCode.W))
         {
-            ThrustCoordinator(1, 0, GrandestParentObj.ThrusterGroup);
+            ThrustCoordinator(0.5f, 0, GrandestParentObj.ThrusterGroup);
         }
         if(Input.GetKey(KeyCode.A))
         {
-            ThrustCoordinator(0, 0.05f, GrandestParentObj.ThrusterGroup);
+            ThrustCoordinator(0, 0.5f, GrandestParentObj.ThrusterGroup);
         }
         if(Input.GetKey(KeyCode.S))
         {
-            ThrustCoordinator(-1, 0, GrandestParentObj.ThrusterGroup);
+            ThrustCoordinator(-0.5f, 0, GrandestParentObj.ThrusterGroup);
         }
         if(Input.GetKey(KeyCode.D))
         {
-            ThrustCoordinator(0, -0.05f, GrandestParentObj.ThrusterGroup);
+            ThrustCoordinator(0, -0.5f, GrandestParentObj.ThrusterGroup);
         }
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -39,30 +44,34 @@ public class ThrusterControlUnit : MonoBehaviour
     {
         switch(tcu_lvl)
         {
-            case TCU_LEVEL.LVL0:
+            case TCU_LEVEL.LVL0: //Simple Thruster Control
                 foreach(GameObject x in _thrusterList)
                 {
-                    GameObject _core = x.GetComponent<EqFunctions>().GrandestParentObj.gameObject.GetComponent<TestPlayerManager>().core;
+                    
                     Rigidbody2D _rb = _core.GetComponent<Rigidbody2D>();
                     if(_rb != null)
                     {
+                        Thruster thruster = x.GetComponent<EqFunctions>().equippableItem as Thruster;
+                        // Debug.Log(thruster.forceOffset);
                         _rb.AddForce(_core.transform.up*_force);
-                        _rb.AddTorque(_torque);
-                        // We need Center of gravity. 
-                        // _rb.AddTorque((transform.localPosition.x+_thruster.forceOffset.x)*appliedForce);
+                        _rb.AddTorque((x.transform.localPosition.x + thruster.forceOffset.x)*_force);
+
+                        float turnForce = Mathf.Sign(x.transform.localPosition.x + thruster.forceOffset.x)*_torque;
+                        _rb.AddForce(_core.transform.up * turnForce);
+                        _rb.AddTorque((x.transform.localPosition.x + thruster.forceOffset.x) * turnForce);
                     }
                         
                 }
                 break;
-            case TCU_LEVEL.LVL1:
+            case TCU_LEVEL.LVL1: //Limit Booster Forces to maintain linear forward and reverse motion
                 break;
-            case TCU_LEVEL.LVL2:
+            case TCU_LEVEL.LVL2: //Add a Turn Power Variable to better turn
                 break;
-            case TCU_LEVEL.LVL3:
+            case TCU_LEVEL.LVL3: //Waypoint Navigation
                 break;
-            case TCU_LEVEL.LVL4:
+            case TCU_LEVEL.LVL4: //Auto Breaking for Terrain
                 break;
-            case TCU_LEVEL.LVL5:
+            case TCU_LEVEL.LVL5: //Auto Projectile Dodgeing
                 break;
             default:
                 Debug.LogError("tcu level not set!");

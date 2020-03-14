@@ -31,4 +31,4 @@ MonoBehaviour:
   weaponType: 1
   damage: 1
   perferationPower: 0
-  firePoint: {x: 0, y: 0.1, z: 0}
+  firePoint: {x: -0.005, y: 0, z: 0}

@@ -29,6 +29,7 @@ public class EqFunctions : MonoBehaviour
                 WeaponGroup = new List<GameObject>();
                 WeaponControlUnit wcu = gameObject.AddComponent<WeaponControlUnit>();
                 ThrusterControlUnit tcu = gameObject.AddComponent<ThrusterControlUnit>();
+                wcu.Init(GrandestParentObj);
                 tcu.Init(GrandestParentObj);
             }            
         }
@@ -89,6 +90,13 @@ public class EqFunctions : MonoBehaviour
                 rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
                 break;
             case EquipmentType.Thruster:
+                break;
+            case EquipmentType.Weapon:
+                Weapon _weapon = _part as Weapon;
+                GameObject _laser = Instantiate(_weapon.mainEffect, transform.position, transform.rotation);
+                _laser.transform.SetParent(transform);
+                _laser.transform.localPosition = _weapon.firePoint;
+                _laser.transform.localRotation = Quaternion.identity;
                 break;
             default:
                 Debug.Log("Detected Default Type");

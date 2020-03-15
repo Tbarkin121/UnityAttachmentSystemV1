@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class PlayerManager : UIFunctions
+public class PlayerManager : VanillaManager
 {
     public Body bodyData;
     private GameObject shipCore;

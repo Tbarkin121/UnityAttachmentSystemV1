@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIFunctions : MonoBehaviour
+public class VanillaManager : MonoBehaviour
 {
     public GameObject CreatePanel(string _name, Transform _parent)
     {

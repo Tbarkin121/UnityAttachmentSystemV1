@@ -25,6 +25,11 @@ public class TestPlayerManager : MonoBehaviour
         GameObject AP3 = core.GetComponent<EqFunctions>().CreateAttachmentPoint("AP3", new Vector3(0.005f, 0.11f, 0), Quaternion.identity);
         AP3.GetComponent<EqFunctions>().EquipItem(weaponItem);
         core.GetComponent<EqFunctions>().IgnoreCollisionsWith(AP3.GetComponent<PolygonCollider2D>());
+
+        //Start Setting Up UI
+        UIControl ui = gameObject.AddComponent<UIControl>();
+        ui.Init();
+        ui.TestInventory(bodyItem as Body);
     }
 
 

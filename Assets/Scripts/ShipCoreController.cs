@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class ShipCoreController : UIFunctions
+public class ShipCoreController : VanillaManager
 {
     public Body bodyData;
     public List<AttachmentPoint> attachmentPoints;

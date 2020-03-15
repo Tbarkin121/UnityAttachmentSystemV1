@@ -24,7 +24,6 @@ public class WeaponControlUnit : MonoBehaviour
         {
         }
     }
-
     private void WeaponCoordinator(List<GameObject> _weaponList)
     {
         switch(wcu_lvl)

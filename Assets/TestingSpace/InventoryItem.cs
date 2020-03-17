@@ -5,14 +5,14 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 [System.Serializable]
-public class ItemUI : MonoBehaviour, IPointerClickHandler, IDragHandler, IDropHandler, IBeginDragHandler, IEndDragHandler
+public class InventoryItem : MonoBehaviour, IPointerClickHandler, IDragHandler, IDropHandler, IBeginDragHandler, IEndDragHandler
 {
     protected  Image image;
-    public event Action<ItemSlot> OnRightClickEvent;
-    public event Action<ItemSlot> OnBeginDragEvent;
-    public event Action<ItemSlot> OnEndDragEvent;
-    public event Action<ItemSlot> OnDragEvent;
-    public event Action<ItemSlot> OnDropEvent;
+    public event Action<InventoryItem> OnRightClickEvent;
+    public event Action<InventoryItem> OnBeginDragEvent;
+    public event Action<InventoryItem> OnEndDragEvent;
+    public event Action<InventoryItem> OnDragEvent;
+    public event Action<InventoryItem> OnDropEvent;
     protected  Color normalColor = Color.white;
     protected  Color disabledColor = new Color(1,1,1,0);
     

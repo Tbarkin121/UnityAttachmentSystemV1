@@ -92,39 +92,40 @@ public class UIControl : VanillaManager
 
     public void TestInventory(Body bodyItem)
     {
-        Inventory.CreateItemSlot(InventoryPanel);
-        Inventory.ManualStart(bodyItem);
+        Inventory.CreateInventoryItem(bodyItem, InventoryPanel);
+        // Inventory.CreateItemSlot(InventoryPanel);
+        // Inventory.ManualStart(bodyItem);
     }
 
-    private void Equip(ItemSlot itemSlot)
+    private void Equip(InventoryItem inventoryItem)
     {
         Debug.Log("Equip 1");
     }
-    public void Equip(EquippableItem item, ItemSlot itemSlot)
+    public void Equip(EquippableItem item, InventoryItem inventoryItem)
     {
         Debug.Log("Equip 2");
     }
-    private void Unequip(ItemSlot itemSlot)
+    private void Unequip(InventoryItem inventoryItem)
     {
         Debug.Log("Unequip 1");
     }
-    public void Unequip(EquippableItem item, ItemSlot itemSlot)
+    public void Unequip(EquippableItem item, InventoryItem inventoryItem)
     {
         Debug.Log("Unequip 2");
     }
-    private void BeginDrag(ItemSlot itemSlot)
+    private void BeginDrag(InventoryItem inventoryItem)
     {
         Debug.Log("BeginDrag");
     }
-    private void EndDrag(ItemSlot itemSlot)
+    private void EndDrag(InventoryItem inventoryItem)
     {
         Debug.Log("EndDrag");
     }
-    private void Drag(ItemSlot itemSlot)
+    private void Drag(InventoryItem inventoryItem)
     {
         Debug.Log("Drag");
     }
-    private void Drop(ItemSlot dropitemSlot)
+    private void Drop(InventoryItem inventoryItem)
     {
         Debug.Log("Drop");
     }
